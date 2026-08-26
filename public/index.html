@@ -16,6 +16,13 @@
 <meta name="ext-resource-dependency" content="images/terra-artists.jpg">
 <meta name="ext-resource-dependency" content="images/terra-ground-snail.jpg">
 <meta name="ext-resource-dependency" content="images/terra-wall-snail.jpg">
+<meta name="ext-resource-dependency" content="images/pulsation-room.jpg">
+<meta name="ext-resource-dependency" content="images/pulsation-quarry.jpg">
+<meta name="ext-resource-dependency" content="images/pulsation-ballerinas-1.jpg">
+<meta name="ext-resource-dependency" content="images/pulsation-ballerinas-2.jpg">
+<meta name="ext-resource-dependency" content="images/pulsation-ballerinas-3.jpg">
+<meta name="ext-resource-dependency" content="images/pulsation-stones-1.jpg">
+<meta name="ext-resource-dependency" content="images/pulsation-quarry-print-1.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -94,9 +101,9 @@
             </sc-for>
           </div>
 
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; align-items:start; margin-top:40px; max-width:760px;">
+          <div style="display:grid; grid-template-columns:1fr; gap:14px; align-items:start; margin-top:40px; max-width:760px;">
             <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="0">
-              <img src="{{ g.image }}" alt="Terra Rossa" style="display:block; width:100%; height:auto;">
+              <img src="{{ g.image }}" alt="{{ sel.name }}" style="display:block; width:100%; height:auto;">
             </sc-for>
           </div>
 
@@ -133,6 +140,10 @@
               <a href="{{ l.href }}" target="_blank" rel="noopener" style="color:#0a0a0a; border-bottom:1px solid #d8d8d5; font-size:19px; letter-spacing:-0.01em;" style-hover="border-bottom:1px solid #0a0a0a;">{{ l.label }} ↗</a>
             </sc-for>
           </div>
+
+          <div style="display:flex; justify-content:flex-end; margin-top:56px; max-width:760px;">
+            <span role="button" tabindex="0" onClick="{{ clear }}" style="cursor:pointer; color:#8a8a86; font-size:11px; letter-spacing:0.08em;" style-hover="color:#0a0a0a;">CLOSE ×</span>
+          </div>
         </div>
       </sc-if>
 
@@ -156,7 +167,7 @@
           </div>
           <div onClick="{{ s4 }}" onMouseEnter="{{ h4 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:78%; left:34%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t4 }};" style-hover="opacity:0.55;">
             <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">Pulsation</div>
-            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Group Exhibition</div>
+            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Marliman Collective — Beita, Jerusalem</div>
           </div>
           <div onClick="{{ s5 }}" onMouseEnter="{{ h5 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:87%; left:70%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t5 }};" style-hover="opacity:0.55;">
             <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">Selected Light Designs</div>
@@ -233,7 +244,6 @@ const DATA = [
         image: "images/terra-artists.jpg" }
     ],
     gallery: [
-      { image: "images/terra-ground-snail.jpg" },
       { image: "images/terra-wall-snail.jpg" }
     ],
     feature: {
@@ -254,11 +264,35 @@ const DATA = [
     year: "2023", role: "Mechanics, control, programming", collab: "Solo",
     media: [{label:"rig photo"},{label:"cad assembly"},{label:"video still"}],
     links: [{label:"Video", href:"#"}] },
-  { name: "Pulsation", desc: "Group Exhibition",
-    body: "Group show contribution: a breathing light field tuned to the gallery's own reverberation time.",
-    year: "2023", role: "Light design", collab: "Group exhibition",
-    media: [{label:"install photo"},{label:"plan"}],
-    links: [{label:"Press", href:"#"}] },
+  { name: "Pulsation", desc: "Marliman Collective — Beita, Jerusalem",
+    color: "#c7f1f2", textColor: "#0a0a0a",
+    body: "A group exhibition built as one machine. Four of us worked as Marliman Collective — Talia Hamburg, Amit Oddes, Yehonatan David and myself — and each work was a part in a single mechanism: one piece set the tempo, the next split it into paths, and the paths fed each other for the length of the show. The recurring element is the stone. My two parts of the machine were The Quarry, a 3D printer that mined stones for the duration of the exhibition, and Ballerinas, six mirrors on copper poles that scattered Talia's video across the room.",
+    year: "2024", role: "The Quarry and Ballerinas — electronics, motion control, print pipeline", collab: "Marliman Collective. Curator: Lital Marcus Morin",
+    image: "images/pulsation-room.jpg", media: [],
+    imageCaption: "Pulsation (Beat), Beita, Jerusalem, June 2024. Photo: Daniel Hanoch",
+    moments: [
+      { title: "The Quarry", text: "A 3D printer, installed in the gallery window, that mined stones. I sliced and modified Talia's 3D models so they could actually print, then ran the machine through OctoPrint with OctoEverywhere on top of it — so I could queue prints and check what had come out from anywhere in the world. It printed for the entire run of the exhibition without a single failure. The opening had a few stones on the floor; by the end there were dozens, in every size.",
+        image: "images/pulsation-quarry.jpg", caption: "Photo: Daniel Hanoch" },
+      { title: "Ballerinas", text: "Six mirrors on tall copper poles, standing in quarried rock — which is where the name comes from. Twelve servo motors, two per mirror, driven over I2C from an ESP32, repeat a choreography every 45 seconds. Each mirror catches part of Talia's projected video and throws it somewhere else, so a single image is scattered across the whole room and never settles. With Talia Hamburg.",
+        image: "images/pulsation-ballerinas-1.jpg", caption: "Photo: Daniel Hanoch" }
+    ],
+    gallery: [
+      { image: "images/pulsation-stones-1.jpg" }
+    ],
+    feature: {
+      title: "Twelve servos, twice",
+      text: "The Ballerinas control rig — twelve servos on one I2C bus, one ESP32, a looping choreography — is the same system that later drives SAMSON. There the moving heads carry lasers instead of mirrors."
+    },
+    credits: [
+      { role: "Marliman Collective", names: "Talia Hamburg, Amit Oddes, Yehonatan David, Eden Dolev" },
+      { role: "Ballerinas", names: "Eden Dolev, Talia Hamburg" },
+      { role: "Curator", names: "Lital Marcus Morin" },
+      { role: "Venue", names: "Beita, Jaffa St. 155, Jerusalem. 6—21 June 2024" },
+      { role: "Documentation", names: "Daniel Hanoch" }
+    ],
+    links: [
+      { label: "Exhibition page", href: "https://beitajerusalem.com/en/exhibitions/beat/" }
+    ] },
   { name: "Selected Light Designs", desc: "Theatre & Festival Work",
     body: "Plots, rigs and operation across theatre productions and festival stages — from small black-box pieces to outdoor main stages.",
     year: "2021—2025", role: "Lighting designer / operator", collab: "Various companies",
