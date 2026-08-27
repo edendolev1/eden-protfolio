@@ -374,6 +374,7 @@ class Component extends DCLogic {
     if (this._vidHost === host) return;
     this._vidHost = host;
     if (this._vidObserver) this._vidObserver.disconnect();
+    if (this._vidMessageHandler) window.removeEventListener("message", this._vidMessageHandler);
     const frame = document.createElement("iframe");
     frame.title = f.title;
     frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
@@ -381,13 +382,28 @@ class Component extends DCLogic {
     frame.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
     frame.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0;";
     frame.src = "https://www.youtube.com/embed/" + f.videoId + "?enablejsapi=1&mute=1&rel=0&playsinline=1&modestbranding=1";
+    let ready = false;
+    let pendingCmd = null;
+    const post = (cmd) => {
+      try {
+        frame.contentWindow.postMessage(JSON.stringify({ event: "command", func: cmd, args: [] }), "*");
+      } catch (err) {}
+    };
+    this._vidMessageHandler = (e) => {
+      if (e.source !== frame.contentWindow) return;
+      let data;
+      try { data = JSON.parse(e.data); } catch (err) { return; }
+      if (data && data.event === "onReady") {
+        ready = true;
+        if (pendingCmd) { post(pendingCmd); pendingCmd = null; }
+      }
+    };
+    window.addEventListener("message", this._vidMessageHandler);
     host.appendChild(frame);
     this._vidObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         const cmd = e.intersectionRatio > 0.55 ? "playVideo" : "pauseVideo";
-        try {
-          frame.contentWindow.postMessage(JSON.stringify({ event: "command", func: cmd, args: [] }), "*");
-        } catch (err) {}
+        if (ready) post(cmd); else pendingCmd = cmd;
       });
     }, { threshold: [0, 0.55] });
     this._vidObserver.observe(host);
@@ -408,6 +424,7 @@ class Component extends DCLogic {
     this.measure();
     if (this.state.sel === null) {
       if (this._vidObserver) { this._vidObserver.disconnect(); this._vidObserver = null; }
+      if (this._vidMessageHandler) { window.removeEventListener("message", this._vidMessageHandler); this._vidMessageHandler = null; }
       this._vidHost = null;
     } else {
       this.mountVideo();
@@ -418,6 +435,8 @@ class Component extends DCLogic {
     window.removeEventListener("scroll", this.onScroll);
     window.removeEventListener("resize", this.onScroll);
     document.removeEventListener("mouseleave", this.onLeave);
+    if (this._vidObserver) this._vidObserver.disconnect();
+    if (this._vidMessageHandler) window.removeEventListener("message", this._vidMessageHandler);
   }
 
   measure() {
@@ -475,7 +494,7 @@ class Component extends DCLogic {
 
   sync() {
     const b = this.baseRef.current, o = this.overRef.current, s = this.spotRef.current;
-    if (o && b) {
+    if (o && b && this.state.sel === null) {
       o.innerHTML = "<div style=\"max-width:1040px;margin:0 auto;padding:36px 40px 80px;\">" + b.innerHTML + "</div>";
     }
     if (s) {
