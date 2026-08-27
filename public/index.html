@@ -23,6 +23,10 @@
 <meta name="ext-resource-dependency" content="images/pulsation-ballerinas-3.jpg">
 <meta name="ext-resource-dependency" content="images/pulsation-stones-1.jpg">
 <meta name="ext-resource-dependency" content="images/pulsation-quarry-print-1.jpg">
+<meta name="ext-resource-dependency" content="images/samson-sign-blue.jpg">
+<meta name="ext-resource-dependency" content="images/samson-sign-red.jpg">
+<meta name="ext-resource-dependency" content="images/samson-lion.jpg">
+<meta name="ext-resource-dependency" content="images/samson-bike.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -69,16 +73,28 @@
             <span role="button" tabindex="0" onClick="{{ clear }}" style="cursor:pointer; color:#8a8a86; font-size:11px; letter-spacing:0.08em; flex:none; padding-top:8px;" style-hover="color:#0a0a0a;">CLOSE ×</span>
           </div>
 
-          <p style="margin:132px 0 0; font-size:15px; line-height:1.65; max-width:560px; text-wrap:pretty;">{{ sel.body }}</p>
+          <sc-if value="{{ hasHero }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:44px; align-items:start; margin:132px 0 0; max-width:900px;">
+              <p style="margin:0; font-size:15px; line-height:1.65; text-wrap:pretty;">{{ sel.body }}</p>
+              <figure style="margin:0;">
+                <img src="{{ sel.heroImage }}" alt="{{ sel.imageCaption }}" style="display:block; width:100%; height:auto;">
+                <figcaption style="margin-top:8px; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8a8a86;">{{ sel.imageCaption }}</figcaption>
+              </figure>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ noHero }}" hint-placeholder-val="{{ true }}">
+            <p style="margin:132px 0 0; font-size:15px; line-height:1.65; max-width:560px; text-wrap:pretty;">{{ sel.body }}</p>
+          </sc-if>
 
           <sc-if value="{{ hasImage }}" hint-placeholder-val="{{ false }}">
-            <figure style="margin:34px 0 0; max-width:760px;">
+            <figure style="margin:34px 0 0; max-width:900px;">
               <img src="{{ sel.image }}" alt="{{ sel.imageCaption }}" style="display:block; width:100%; height:auto;">
               <figcaption style="margin-top:8px; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8a8a86;">{{ sel.imageCaption }}</figcaption>
             </figure>
           </sc-if>
 
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:40px; align-items:start; margin-top:40px; max-width:760px;">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:40px; align-items:start; margin-top:40px; max-width:900px;">
             <sc-for list="{{ moments }}" as="m" hint-placeholder-count="2">
               <div style="display:flex; flex-direction:column; gap:8px;">
                 <div style="font-size:15px; font-weight:600; letter-spacing:-0.01em;">{{ m.title }}</div>
@@ -93,7 +109,18 @@
             </sc-for>
           </div>
 
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:14px; margin-top:34px; max-width:760px;">
+          <sc-for list="{{ wideMoments }}" as="w" hint-placeholder-count="0">
+            <div style="display:flex; flex-direction:column; gap:10px; margin-top:48px; max-width:900px;">
+              <div style="font-size:15px; font-weight:600; letter-spacing:-0.01em;">{{ w.title }}</div>
+              <p style="margin:0; font-size:14px; line-height:1.6; color:#3a3a37; max-width:620px; text-wrap:pretty;">{{ w.text }}</p>
+              <figure style="margin:6px 0 0;">
+                <img src="{{ w.image }}" alt="{{ w.title }}" style="display:block; width:100%; height:auto;">
+                <figcaption style="margin-top:8px; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8a8a86;">{{ w.caption }}</figcaption>
+              </figure>
+            </div>
+          </sc-for>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:14px; margin-top:34px; max-width:900px;">
             <sc-for list="{{ media }}" as="m" hint-placeholder-count="0">
               <div style="aspect-ratio:4/3; border:1px solid #d8d8d5; background-image:repeating-linear-gradient(135deg, #f4f4f2 0 6px, #ffffff 6px 12px); display:flex; align-items:flex-end; padding:8px;">
                 <span style="font-size:9px; letter-spacing:0.06em; text-transform:uppercase; color:#8a8a86; background:#fff; padding:2px 4px;">{{ m.label }}</span>
@@ -101,20 +128,20 @@
             </sc-for>
           </div>
 
-          <div style="display:grid; grid-template-columns:1fr; gap:14px; align-items:start; margin-top:40px; max-width:760px;">
+          <div style="display:grid; grid-template-columns:1fr; gap:14px; align-items:start; margin-top:40px; max-width:900px;">
             <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="0">
               <img src="{{ g.image }}" alt="{{ sel.name }}" style="display:block; width:100%; height:auto;">
             </sc-for>
           </div>
 
           <sc-if value="{{ hasFeature }}" hint-placeholder-val="{{ false }}">
-            <div style="display:flex; flex-direction:column; gap:12px; margin-top:48px; max-width:760px;">
+            <div style="display:flex; flex-direction:column; gap:12px; margin-top:48px; max-width:900px;">
               <div style="font-size:15px; font-weight:600; letter-spacing:-0.01em;">{{ feature.title }}</div>
               <p style="margin:0; font-size:14px; line-height:1.6; color:#3a3a37; max-width:560px; text-wrap:pretty;">{{ feature.text }}</p>
               <sc-if value="{{ hasFeatureVideo }}" hint-placeholder-val="{{ false }}">
                 <figure style="margin:6px 0 0;">
                   <div ref="{{ videoRef }}" style="position:relative; width:100%; aspect-ratio:16/9; background:#0a0a0a;"></div>
-                  <figcaption style="margin-top:8px; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8a8a86;">Video: Idan Zarmon</figcaption>
+                  <figcaption style="margin-top:8px; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8a8a86;">{{ featureVideoCaption }}</figcaption>
                 </figure>
               </sc-if>
             </div>
@@ -126,7 +153,7 @@
             <span>{{ sel.collab }}</span>
           </div>
 
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:14px 32px; margin-top:20px; max-width:760px;">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:14px 32px; margin-top:20px; max-width:900px;">
             <sc-for list="{{ credits }}" as="c" hint-placeholder-count="0">
               <div style="display:flex; flex-direction:column; gap:3px;">
                 <span style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8a8a86;">{{ c.role }}</span>
@@ -141,7 +168,7 @@
             </sc-for>
           </div>
 
-          <div style="display:flex; justify-content:flex-end; margin-top:56px; max-width:760px;">
+          <div style="display:flex; justify-content:flex-end; margin-top:56px; max-width:900px;">
             <span role="button" tabindex="0" onClick="{{ clear }}" style="cursor:pointer; color:#8a8a86; font-size:11px; letter-spacing:0.08em;" style-hover="color:#0a0a0a;">CLOSE ×</span>
           </div>
         </div>
@@ -163,7 +190,7 @@
           </div>
           <div onClick="{{ s3 }}" onMouseEnter="{{ h3 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:57%; left:64%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t3 }};" style-hover="opacity:0.55;">
             <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">SAMSON</div>
-            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">12 Servo Motors — Lasers</div>
+            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Solo Performance — SVT Marathon 2024</div>
           </div>
           <div onClick="{{ s4 }}" onMouseEnter="{{ h4 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:78%; left:34%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t4 }};" style-hover="opacity:0.55;">
             <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">Pulsation</div>
@@ -220,7 +247,8 @@ const DATA = [
     feature: {
       title: "Venetian blinds",
       text: "The technological — and maybe the dramatic — peak of BALASH. A huge Venetian blind slowly opens its slats, then slowly rises. Stepper motors driven through dedicated drivers and an ESP32; the cue arrives over DMX from the lighting console (GrandMA3), so the move is timed exactly to the show.",
-      videoId: "lHv_H50YZnM"
+      videoId: "lHv_H50YZnM",
+      videoCaption: "Video: Idan Zarmon"
     },
     links: [
       { label: "Full show (YouTube)", href: "https://www.youtube.com/watch?v=3fGtYW57rjo" },
@@ -259,11 +287,37 @@ const DATA = [
     links: [
       { label: "Exhibition page", href: "https://hamiffal.com/project/%d7%90%d7%93%d7%9e%d7%94-%d7%90%d7%93%d7%95%d7%9e%d7%94/" }
     ] },
-  { name: "SAMSON", desc: "12 Servo Motors — Lasers",
-    body: "A kinetic laser array driven by twelve servos under a single controller, choreographed so the beams draw shifting geometry across the room.",
-    year: "2023", role: "Mechanics, control, programming", collab: "Solo",
-    media: [{label:"rig photo"},{label:"cad assembly"},{label:"video still"}],
-    links: [{label:"Video", href:"#"}] },
+  { name: "SAMSON", desc: "Solo Performance — SVT Marathon 2024",
+    body: "A solo performance inspired by Samson the hero and his adventures. The starting point of the work is David Grossman's book Lion's Honey. The show combines text, a fight with a lion, setting foxes on fire, and riding that never ends. Out of the eater came something to eat, and out of the strong came something sweet. // Last April I was hit in a car-ramming attack. The biblical figure of Samson accompanied me through the healing and the post-trauma, became an artistic alter ego for processing the event and a gate to express revenge, anger, disappointment, gentleness and the hope to heal. 300 foxes tied together with a burning torch between them in the field of the Philistines — a poetics of revenge.",
+    year: "2024", role: "Creator, performer, original score, electronics and light", collab: "Third-year finale, School of Visual Theatre, Jerusalem",
+    heroImage: "images/samson-sign-red.jpg", media: [],
+    imageCaption: "SAMSON, School of Visual Theatre Marathon, June 2024. Photos: Amit Mann",
+    moments: [
+      { title: "The sign that breathes with the music", text: "SAMSON in blackletter, cut from milky acrylic on a laser cutter, with 12V LED glued along the outline of every letter so it glows like old neon. Each letter runs on its own MOSFET channel, PWM'd from an ESP32, so brightness is controlled letter by letter. TouchDesigner drives it live off the music through three different readings — EQ bands, snare detection, and a noise graphic — and switches between them on its own, so the sign never reacts the same way twice. Ambitious, tight, and it looked good.",
+        image: "images/samson-sign-blue.jpg", caption: "Photo: Amit Mann", wide: true },
+      { title: "A speaker inside the lion", text: "The lion carries a JBL speaker in its belly. TouchDesigner crossfades the show's sound between the PA system and that speaker over Bluetooth routing, so the sound leaves the room and moves into the animal being carried overhead. Not everyone in the audience noticed the handover, but it is what turns the fight with the lion into an epic ending.",
+        image: "images/samson-lion.jpg", caption: "Photo: Amit Mann" },
+      { title: "Five speakers, one score", text: "All the music in the show is original, written for the room rather than for headphones: a five-speaker surround system I designed, mixed and mapped myself, so the burning field surrounds the audience instead of facing it.",
+        image: "images/samson-bike.jpg", caption: "Photo: Amit Mann" }
+    ],
+    gallery: [],
+    feature: {
+      title: "300 foxes",
+      text: "Samson tied 300 foxes tail to tail, put a burning torch between each pair and sent them into the fields of the Philistines. My version is a pair of foxes, 3D modelled and printed, tails knotted together, with a place for a candle between them — a very gentle object for a horrific event. Around them twelve servo motors carrying laser modules sweep the space, drawing the scenography of a theatre going up in flames.",
+      videoId: "N90xJqtXRoA",
+      videoCaption: "Video: Tal Galon"
+    },
+    credits: [
+      { role: "Creation and performance", names: "Eden Dolev" },
+      { role: "Technical team", names: "Ma'ayan Levinger, Daniella Lila Schlatzer, Rotem Levy, Noa Ramon, Yuval Rubinstein, Eden Cohen, Aviv Suter" },
+      { role: "Photography", names: "Amit Mann" },
+      { role: "Video", names: "Tal Galon" },
+      { role: "Thanks", names: "Shila Rabin and Michael Malka for the technical help; Assaf Elkalai for the support and guidance along the way" },
+      { role: "Venue", names: "School of Visual Theatre, 11 Bezalel St., Jerusalem. Marathon 2024, 20 & 26 June" }
+    ],
+    links: [
+      { label: "Festival page", href: "https://visualtheatre.co.il/fests/event/468/" }
+    ] },
   { name: "Pulsation", desc: "Marliman Collective — Beita, Jerusalem",
     color: "#c7f1f2", textColor: "#0a0a0a",
     body: "A group exhibition built as one machine. Four of us worked as Marliman Collective — Talia Hamburg, Amit Oddes, Yehonatan David and myself — and each work was a part in a single mechanism: one piece set the tempo, the next split it into paths, and the paths fed each other for the length of the show. The recurring element is the stone. My two parts of the machine were The Quarry, a 3D printer that mined stones for the duration of the exhibition, and Ballerinas, six mirrors on copper poles that scattered Talia's video across the room.",
@@ -478,11 +532,15 @@ class Component extends DCLogic {
       sel: i === null ? {} : DATA[i],
       hasImage: i !== null && !!DATA[i].image,
       onLight: i === null ? "#ffffff" : (DATA[i].textColor || "#ffffff"),
-      moments: i === null ? [] : (DATA[i].moments || []),
+      hasHero: i !== null && !!DATA[i].heroImage,
+      noHero: i !== null && !DATA[i].heroImage,
+      moments: i === null ? [] : (DATA[i].moments || []).filter(m => !m.wide),
+      wideMoments: i === null ? [] : (DATA[i].moments || []).filter(m => m.wide && m.image),
       feature: i === null ? null : (DATA[i].feature || null),
       gallery: i === null ? [] : (DATA[i].gallery || []),
       hasFeature: i !== null && !!DATA[i].feature,
       hasFeatureVideo: i !== null && !!(DATA[i].feature && DATA[i].feature.videoId),
+      featureVideoCaption: (i !== null && DATA[i].feature && DATA[i].feature.videoCaption) || "",
       videoRef: this.videoRef,
       credits: i === null ? [] : (DATA[i].credits || []),
       media: i === null ? [] : (DATA[i].media || []),
