@@ -27,6 +27,17 @@
 <meta name="ext-resource-dependency" content="images/samson-sign-red.jpg">
 <meta name="ext-resource-dependency" content="images/samson-lion.jpg">
 <meta name="ext-resource-dependency" content="images/samson-bike.jpg">
+<meta name="ext-resource-dependency" content="images/lightdesigns-home1.jpg">
+<meta name="ext-resource-dependency" content="images/lightdesigns-home2.jpg">
+<meta name="ext-resource-dependency" content="images/lightdesigns-nonna1.jpg">
+<meta name="ext-resource-dependency" content="images/lightdesigns-nonna2.jpg">
+<meta name="ext-resource-dependency" content="images/lightdesigns-nonna3.jpg">
+<meta name="ext-resource-dependency" content="images/lightdesigns-zik1.jpg">
+<meta name="ext-resource-dependency" content="images/lightdesigns-zik2.jpg">
+<meta name="ext-resource-dependency" content="images/lightdesigns-tension1.jpg">
+<meta name="ext-resource-dependency" content="images/lightdesigns-tension2.jpg">
+<meta name="ext-resource-dependency" content="images/lightdesigns-tension3.jpg">
+<meta name="ext-resource-dependency" content="images/lightdesigns-tension4.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -45,26 +56,69 @@
   }
   @keyframes fade-in { from { opacity:0; } to { opacity:1; } }
   @keyframes iris { from { opacity:0; transform:scale(.85); } to { opacity:1; transform:scale(1); } }
+
+  @media (max-width: 720px) {
+    .spot-cursor, #spot-layer { display:none !important; }
+    .page-shell { padding:28px 20px 64px !important; }
+    .name-circle {
+      --circle-d: min(72vw, 280px);
+      display:flex !important;
+      align-items:center;
+      justify-content:center;
+      width:var(--circle-d);
+      height:var(--circle-d);
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(15,34,247,1) 0 calc(var(--circle-d) * 0.36), rgba(15,34,247,0.92) calc(var(--circle-d) * 0.43), rgba(15,34,247,0) calc(var(--circle-d) * 0.5));
+      margin:6px auto 0;
+      padding:18px;
+      text-align:center;
+    }
+    .name-circle h1 {
+      margin:0 !important;
+      font-size:clamp(30px, 11vw, 46px) !important;
+      line-height:1.05 !important;
+      text-align:center;
+      color:#ffffff !important;
+    }
+    .subtitle { text-align:center !important; margin-top:22px !important; }
+    .work-scatter {
+      position:static !important;
+      height:auto !important;
+      display:flex !important;
+      flex-direction:column !important;
+      gap:30px !important;
+    }
+    .work-item {
+      position:static !important;
+      max-width:100% !important;
+      transform:none !important;
+    }
+    .detail-panel { padding-left:0 !important; padding-top:64px !important; }
+    .hero-grid { grid-template-columns:1fr !important; gap:28px !important; }
+    .about-contact { flex-wrap:wrap !important; row-gap:20px !important; }
+  }
 </style>
 </helmet>
 
 <div style="position:relative; min-height:100vh; background:#ffffff; color:#0a0a0a; font-family:'Open Sans', sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden;">
 
-  <div ref="{{ spotRef }}" style="position:fixed; top:0; left:0; width:420px; height:420px; margin:-210px 0 0 -210px; border-radius:50%; pointer-events:none; opacity:0; transition:opacity .4s ease; z-index:3;"></div>
+  <div ref="{{ spotRef }}" class="spot-cursor" style="position:fixed; top:0; left:0; width:420px; height:420px; margin:-210px 0 0 -210px; border-radius:50%; pointer-events:none; opacity:0; transition:opacity .4s ease; z-index:3;"></div>
 
   <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
-    <div style="position:fixed; z-index:1; pointer-events:none; border-radius:50%; animation:iris .45s cubic-bezier(.16,1,.3,1); {{ irisStyle }}"></div>
+    <div style="position:absolute; z-index:1; pointer-events:none; border-radius:50%; animation:iris .45s cubic-bezier(.16,1,.3,1); {{ irisStyle }}"></div>
   </sc-if>
 
-  <div ref="{{ baseRef }}" style="position:relative; z-index:2; max-width:1040px; margin:0 auto; padding:36px 40px 80px;">
+  <div ref="{{ baseRef }}" class="page-shell" style="position:relative; z-index:2; max-width:1040px; margin:0 auto; padding:36px 40px 80px;">
 
-    <h1 style="margin:0 0 0 -7px; font-size:clamp(56px, 11vw, 132px); line-height:0.92; font-weight:500; letter-spacing:-0.045em;">Eden Dolev</h1>
-    <p style="margin:16px 0 0; font-size:15px; font-weight:400; letter-spacing:0.04em; text-transform:uppercase; color:#6e6e6a;">Performance Artist / Electronics Engineer / Light &amp; Optics</p>
+    <div class="name-circle">
+      <h1 style="margin:0 0 0 -7px; font-size:clamp(56px, 11vw, 132px); line-height:0.92; font-weight:500; letter-spacing:-0.045em;">Eden Dolev</h1>
+    </div>
+    <p class="subtitle" style="margin:16px 0 0; font-size:15px; font-weight:400; letter-spacing:0.04em; text-transform:uppercase; color:#6e6e6a;">Performance Artist / Electronics Engineer / Light &amp; Optics</p>
 
     <div style="position:relative; width:100%; min-height:520px; margin-top:64px;">
 
       <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
-        <div style="animation:fade-in .4s ease; padding-left:132px; padding-top:96px;">
+        <div class="detail-panel" style="animation:fade-in .4s ease; padding-left:132px; padding-top:96px;">
           <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:24px;">
             <div ref="{{ blockRef }}" role="button" tabindex="0" onClick="{{ clear }}" style="cursor:pointer; max-width:250px; text-align:center;">
               <div style="font-size:34px; font-weight:500; letter-spacing:-0.03em; line-height:1.05; color:{{ onLight }};"><span ref="{{ titleRef }}" style="display:inline-block;">{{ sel.name }}</span></div>
@@ -74,7 +128,7 @@
           </div>
 
           <sc-if value="{{ hasHero }}" hint-placeholder-val="{{ false }}">
-            <div style="display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:44px; align-items:start; margin:132px 0 0; max-width:900px;">
+            <div class="hero-grid" style="display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:44px; align-items:start; margin:132px 0 0; max-width:900px;">
               <p style="margin:0; font-size:15px; line-height:1.65; text-wrap:pretty;">{{ sel.body }}</p>
               <figure style="margin:0;">
                 <img src="{{ sel.heroImage }}" alt="{{ sel.imageCaption }}" style="display:block; width:100%; height:auto;">
@@ -120,6 +174,20 @@
             </div>
           </sc-for>
 
+          <sc-if value="{{ hasCarousel }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:40px; max-width:900px;">
+              <figure style="margin:0; position:relative;">
+                <img src="{{ carouselItem.image }}" alt="{{ carouselItem.caption }}" style="display:block; width:100%; height:auto; background:#f4f4f2;">
+                <div role="button" tabindex="0" onClick="{{ carouselPrev }}" aria-label="Previous photo" style="position:absolute; top:50%; left:12px; transform:translateY(-50%); width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.88); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; line-height:1; color:#0a0a0a;" style-hover="background:#ffffff;">‹</div>
+                <div role="button" tabindex="0" onClick="{{ carouselNext }}" aria-label="Next photo" style="position:absolute; top:50%; right:12px; transform:translateY(-50%); width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.88); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; line-height:1; color:#0a0a0a;" style-hover="background:#ffffff;">›</div>
+                <figcaption style="margin-top:8px; display:flex; justify-content:space-between; gap:12px; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8a8a86;">
+                  <span>{{ carouselItem.caption }}</span>
+                  <span style="flex:none;">{{ carouselPos }} / {{ carouselCount }}</span>
+                </figcaption>
+              </figure>
+            </div>
+          </sc-if>
+
           <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:14px; margin-top:34px; max-width:900px;">
             <sc-for list="{{ media }}" as="m" hint-placeholder-count="0">
               <div style="aspect-ratio:4/3; border:1px solid #d8d8d5; background-image:repeating-linear-gradient(135deg, #f4f4f2 0 6px, #ffffff 6px 12px); display:flex; align-items:flex-end; padding:8px;">
@@ -164,7 +232,7 @@
 
           <div style="display:flex; gap:28px; flex-wrap:wrap; margin-top:32px;">
             <sc-for list="{{ sel.links }}" as="l" hint-placeholder-count="1">
-              <a href="{{ l.href }}" target="_blank" rel="noopener" style="color:#0a0a0a; border-bottom:1px solid #d8d8d5; font-size:19px; letter-spacing:-0.01em;" style-hover="border-bottom:1px solid #0a0a0a;">{{ l.label }} ↗</a>
+              <a href="{{ l.href }}" target="_blank" rel="noopener" style="color:#0a0a0a; border-bottom:1px solid #d8d8d5; font-size:19px; letter-spacing:-0.01em;" style-hover="border-bottom:1px solid #0a0a0a;">{{ l.label }} ↗︎</a>
             </sc-for>
           </div>
 
@@ -175,28 +243,28 @@
       </sc-if>
 
       <sc-if value="{{ noSel }}" hint-placeholder-val="{{ true }}">
-        <div style="position:relative; width:100%; height:480px;">
-          <div onClick="{{ s0 }}" onMouseEnter="{{ h0 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:9%; left:5%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t0 }};" style-hover="opacity:0.55;">
+        <div class="work-scatter" style="position:relative; width:100%; height:480px;">
+          <div class="work-item" onClick="{{ s0 }}" onMouseEnter="{{ h0 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:9%; left:5%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t0 }};" style-hover="opacity:0.55;">
             <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">BALASH</div>
             <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Detective Performance — SVT Finale 2025</div>
           </div>
-          <div onClick="{{ s1 }}" onMouseEnter="{{ h1 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:26%; left:58%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t1 }};" style-hover="opacity:0.55;">
+          <div class="work-item" onClick="{{ s1 }}" onMouseEnter="{{ h1 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:26%; left:58%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t1 }};" style-hover="opacity:0.55;">
             <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">DMX-Shield</div>
             <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">PCB Design</div>
           </div>
-          <div onClick="{{ s2 }}" onMouseEnter="{{ h2 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:44%; left:11%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t2 }};" style-hover="opacity:0.55;">
+          <div class="work-item" onClick="{{ s2 }}" onMouseEnter="{{ h2 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:44%; left:11%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t2 }};" style-hover="opacity:0.55;">
             <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">Terra Rossa</div>
             <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Duo Exhibition — Hamiffal, Jerusalem</div>
           </div>
-          <div onClick="{{ s3 }}" onMouseEnter="{{ h3 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:57%; left:64%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t3 }};" style-hover="opacity:0.55;">
+          <div class="work-item" onClick="{{ s3 }}" onMouseEnter="{{ h3 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:57%; left:64%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t3 }};" style-hover="opacity:0.55;">
             <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">SAMSON</div>
             <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Solo Performance — SVT Marathon 2024</div>
           </div>
-          <div onClick="{{ s4 }}" onMouseEnter="{{ h4 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:78%; left:34%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t4 }};" style-hover="opacity:0.55;">
+          <div class="work-item" onClick="{{ s4 }}" onMouseEnter="{{ h4 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:78%; left:34%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t4 }};" style-hover="opacity:0.55;">
             <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">Pulsation</div>
             <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Marliman Collective — Beita, Jerusalem</div>
           </div>
-          <div onClick="{{ s5 }}" onMouseEnter="{{ h5 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:87%; left:70%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t5 }};" style-hover="opacity:0.55;">
+          <div class="work-item" onClick="{{ s5 }}" onMouseEnter="{{ h5 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:87%; left:70%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t5 }};" style-hover="opacity:0.55;">
             <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">Selected Light Designs</div>
             <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Theatre &amp; Festival Work</div>
           </div>
@@ -205,14 +273,14 @@
 
     </div>
 
-    <section style="display:flex; align-items:baseline; gap:clamp(32px, 6vw, 80px); padding-top:88px;">
+    <section class="about-contact" style="display:flex; align-items:baseline; gap:clamp(32px, 6vw, 80px); padding-top:88px;">
       <a href="about.html" style="display:flex; align-items:baseline; gap:10px;" style-hover="opacity:0.5;">
         <span style="font-size:clamp(30px, 4.4vw, 48px); line-height:1; font-weight:300; letter-spacing:-0.03em;">About</span>
-        <span style="font-size:11px; color:#8a8a86;">↗</span>
+        <span style="font-size:11px; color:#8a8a86;">↗︎</span>
       </a>
       <a href="contact.html" style="display:flex; align-items:baseline; gap:10px;" style-hover="opacity:0.5;">
         <span style="font-size:clamp(30px, 4.4vw, 48px); line-height:1; font-weight:300; letter-spacing:-0.03em;">Contact</span>
-        <span style="font-size:11px; color:#8a8a86;">↗</span>
+        <span style="font-size:11px; color:#8a8a86;">↗︎</span>
       </a>
     </section>
 
@@ -348,16 +416,37 @@ const DATA = [
       { label: "Exhibition page", href: "https://beitajerusalem.com/en/exhibitions/beat/" }
     ] },
   { name: "Selected Light Designs", desc: "Theatre & Festival Work",
-    body: "Plots, rigs and operation across theatre productions and festival stages — from small black-box pieces to outdoor main stages.",
-    year: "2021—2025", role: "Lighting designer / operator", collab: "Various companies",
-    media: [{label:"stage photo"},{label:"lighting plot"},{label:"stage photo"}],
-    links: [{label:"Full list (PDF)", href:"#"}] }
+    color: "#0a0a0a", textColor: "#ffffff",
+    body: "I have been a light technician and designer for the past ten years — this is my origin of power, my passion for showing how a view of light, and its impact, can shape reality or an image. I've worked across multiple venues in Israel: Tmuna, School of Visual Theatre (Performance Convention), Hazira, Kelim, and others. I'm always eager to learn more and seek new challenges — currently working on several light designs in parallel.",
+    year: "2021—2025", role: "Lighting designer / operator", collab: "Tmuna · School of Visual Theatre · Hazira · Kelim",
+    media: [],
+    carousel: [
+      { image: "images/lightdesigns-home1.jpg", show: "Home Shit Home", caption: "Home Shit Home — Achinoam Mendelson. Photo: Yelena Kvetny" },
+      { image: "images/lightdesigns-home2.jpg", show: "Home Shit Home", caption: "Home Shit Home — Achinoam Mendelson. Photo: Yelena Kvetny" },
+      { image: "images/lightdesigns-nonna1.jpg", show: "Nonna", caption: "Nonna — Sara. Photo: Amit Mann" },
+      { image: "images/lightdesigns-nonna2.jpg", show: "Nonna", caption: "Nonna — Sara. Photo: Amit Mann" },
+      { image: "images/lightdesigns-nonna3.jpg", show: "Nonna", caption: "Nonna — Sara. Photo: Amit Mann" },
+      { image: "images/lightdesigns-zik1.jpg", show: "As the Sun Sets in Our Region", caption: "As the Sun Sets in Our Region — Zik. Photo: Yelena Kvetny" },
+      { image: "images/lightdesigns-zik2.jpg", show: "As the Sun Sets in Our Region", caption: "As the Sun Sets in Our Region — Zik. Photo: Yelena Kvetny" },
+      { image: "images/lightdesigns-tension1.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon" },
+      { image: "images/lightdesigns-tension2.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon" },
+      { image: "images/lightdesigns-tension3.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon" },
+      { image: "images/lightdesigns-tension4.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon" }
+    ],
+    credits: [
+      { role: "Home Shit Home", names: "Achinoam Mendelson. Photo: Yelena Kvetny" },
+      { role: "Nonna", names: "Sara. Photo: Amit Mann" },
+      { role: "As the Sun Sets in Our Region", names: "Zik. Photo: Yelena Kvetny" },
+      { role: "Tension", names: "Yael Weiss. Photo: Tal Galon" }
+    ],
+    links: [] }
 ];
 
 const POS = [[5,9],[58,26],[11,44],[64,57],[34,78],[70,87]];
 
 class Component extends DCLogic {
-  state = { sel: null, hoverIndex: null, iris: null };
+  state = { sel: null, hoverIndex: null, iris: null, carouselIndex: 0 };
+  isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 720px)").matches;
   spotRef = React.createRef();
   baseRef = React.createRef();
   overRef = React.createRef();
@@ -412,13 +501,16 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
-    this.onMove = (e) => { this.lastX = e.clientX; this.lastY = e.clientY; this.place(e.clientX, e.clientY); };
-    this.onLeave = () => this.fade(0);
-    this.onScroll = () => { if (this.lastX != null) this.place(this.lastX, this.lastY); this.measure(); };
-    window.addEventListener("mousemove", this.onMove);
+    this.onScroll = () => { if (!this.isMobile && this.lastX != null) this.place(this.lastX, this.lastY); };
+    this.onResize = () => { if (!this.isMobile && this.lastX != null) this.place(this.lastX, this.lastY); this.measure(); };
+    if (!this.isMobile) {
+      this.onMove = (e) => { this.lastX = e.clientX; this.lastY = e.clientY; this.place(e.clientX, e.clientY); };
+      this.onLeave = () => this.fade(0);
+      window.addEventListener("mousemove", this.onMove);
+      document.addEventListener("mouseleave", this.onLeave);
+    }
     window.addEventListener("scroll", this.onScroll, { passive: true });
-    window.addEventListener("resize", this.onScroll);
-    document.addEventListener("mouseleave", this.onLeave);
+    window.addEventListener("resize", this.onResize);
     this.sync();
   }
   componentDidUpdate() {
@@ -433,10 +525,10 @@ class Component extends DCLogic {
     }
   }
   componentWillUnmount() {
-    window.removeEventListener("mousemove", this.onMove);
+    if (this.onMove) window.removeEventListener("mousemove", this.onMove);
     window.removeEventListener("scroll", this.onScroll);
-    window.removeEventListener("resize", this.onScroll);
-    document.removeEventListener("mouseleave", this.onLeave);
+    window.removeEventListener("resize", this.onResize);
+    if (this.onLeave) document.removeEventListener("mouseleave", this.onLeave);
     if (this._vidObserver) this._vidObserver.disconnect();
     if (this._vidMessageHandler) window.removeEventListener("message", this._vidMessageHandler);
   }
@@ -456,12 +548,14 @@ class Component extends DCLogic {
     const d = this.descRef.current;
     const rects = [tr];
     if (d) rects.push(d.getBoundingClientRect());
-    const cx = tr.left + tr.width / 2;
-    const cy = tr.top + tr.height / 2;
+    const vx = tr.left + tr.width / 2;
+    const vy = tr.top + tr.height / 2;
+    const cx = vx + window.scrollX;
+    const cy = vy + window.scrollY;
     let reach = 0;
     rects.forEach(r => {
       [[r.left, r.top], [r.right, r.top], [r.left, r.bottom], [r.right, r.bottom]].forEach(([x, y]) => {
-        reach = Math.max(reach, Math.hypot(x - cx, y - cy));
+        reach = Math.max(reach, Math.hypot(x - vx, y - vy));
       });
     });
     const n = Math.round((reach + 30) * 2);
@@ -471,6 +565,7 @@ class Component extends DCLogic {
   }
 
   fade(v) {
+    if (this.isMobile) return;
     const val = this.state.sel !== null ? 0 : v;
     if (this.spotRef.current) this.spotRef.current.style.opacity = val;
     if (this.overRef.current) this.overRef.current.style.opacity = val;
@@ -480,6 +575,7 @@ class Component extends DCLogic {
   color() { return this.props.spotColor ?? "#0f22f7"; }
 
   place(x, y) {
+    if (this.isMobile) return;
     const s = this.spotRef.current, o = this.overRef.current;
     if (!s) return;
     s.style.left = x + "px";
@@ -495,6 +591,7 @@ class Component extends DCLogic {
   }
 
   sync() {
+    if (this.isMobile) return;
     const b = this.baseRef.current, o = this.overRef.current, s = this.spotRef.current;
     if (o && b && this.state.sel === null) {
       o.innerHTML = "<div style=\"max-width:1040px;margin:0 auto;padding:36px 40px 80px;\">" + b.innerHTML + "</div>";
@@ -517,12 +614,20 @@ class Component extends DCLogic {
   }
 
   pick(i) {
-    this.setState(st => (st.sel === i ? { sel: null, iris: null } : { sel: i, iris: null }));
+    this.setState(st => (st.sel === i ? { sel: null, iris: null } : { sel: i, iris: null, carouselIndex: 0 }));
     clearTimeout(this._remeasure);
     this._remeasure = setTimeout(() => this.measure(), 500);
   }
 
   hover(i) { this.setState({ hoverIndex: i }); }
+
+  carouselStep(dir) {
+    const i = this.state.sel;
+    if (i === null) return;
+    const arr = DATA[i].carousel || [];
+    if (!arr.length) return;
+    this.setState(st => ({ carouselIndex: ((st.carouselIndex || 0) + dir + arr.length) % arr.length }));
+  }
 
   shift(k) {
     const hi = this.state.hoverIndex;
@@ -565,6 +670,14 @@ class Component extends DCLogic {
       videoRef: this.videoRef,
       credits: i === null ? [] : (DATA[i].credits || []),
       media: i === null ? [] : (DATA[i].media || []),
+      hasCarousel: i !== null && !!(DATA[i].carousel && DATA[i].carousel.length),
+      carouselItem: (i !== null && DATA[i].carousel && DATA[i].carousel.length)
+        ? DATA[i].carousel[(this.state.carouselIndex || 0) % DATA[i].carousel.length]
+        : {},
+      carouselPos: (this.state.carouselIndex || 0) + 1,
+      carouselCount: i === null ? 0 : ((DATA[i].carousel || []).length),
+      carouselPrev: () => this.carouselStep(-1),
+      carouselNext: () => this.carouselStep(1),
       clear: () => this.setState({ sel: null, iris: null }),
       unhover: () => this.hover(null),
       irisStyle: this.irisStyle()
