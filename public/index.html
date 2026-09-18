@@ -178,7 +178,7 @@
             <div style="margin-top:40px; max-width:900px;">
               <figure style="margin:0;">
                 <div style="position:relative; width:100%; aspect-ratio:4/3; overflow:hidden; background:#f4f4f2;">
-                  <img src="{{ carouselItem.image }}" alt="{{ carouselItem.caption }}" style="display:block; width:100%; height:100%; object-fit:cover;">
+                  <img src="{{ carouselItem.image }}" alt="{{ carouselItem.caption }}" style="display:block; width:100%; height:100%; object-fit:cover; object-position:center {{ carouselItem.focus }};">
                   <div role="button" tabindex="0" onClick="{{ carouselPrev }}" aria-label="Previous photo" style="position:absolute; top:50%; left:12px; transform:translateY(-50%); width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.88); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; line-height:1; color:#0a0a0a;" style-hover="background:#ffffff;">‹</div>
                   <div role="button" tabindex="0" onClick="{{ carouselNext }}" aria-label="Next photo" style="position:absolute; top:50%; right:12px; transform:translateY(-50%); width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.88); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; line-height:1; color:#0a0a0a;" style-hover="background:#ffffff;">›</div>
                 </div>
@@ -252,7 +252,7 @@
           </div>
           <div class="work-item" onClick="{{ s1 }}" onMouseEnter="{{ h1 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:26%; left:58%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t1 }};" style-hover="opacity:0.55;">
             <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">DMX-Shield</div>
-            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">PCB Design</div>
+            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">ESP32 DMX / Art-Net Shield</div>
           </div>
           <div class="work-item" onClick="{{ s2 }}" onMouseEnter="{{ h2 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:44%; left:11%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t2 }};" style-hover="opacity:0.55;">
             <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">Terra Rossa</div>
@@ -324,9 +324,10 @@ const DATA = [
       { label: "Full show (YouTube)", href: "https://www.youtube.com/watch?v=3fGtYW57rjo" },
       { label: "Festival page", href: "https://visualtheatre.co.il/fests/en/event/809/" }
     ] },
-  { name: "DMX-Shield", desc: "PCB Design",
-    body: "An Arduino-compatible shield for DMX512 output with isolated line drivers, designed for reliable use in touring lighting rigs.",
-    year: "2024", role: "Schematic, layout, firmware", collab: "Solo",
+  { name: "DMX-Shield", desc: "ESP32 DMX / Art-Net Shield",
+    color: "#ec008c",
+    body: "An open-source, low-cost ESP32 shield for DMX-512 — built to work either as a DMX/Art-Net sender, bridging a computer's Art-Net output onto a real DMX line, or as a modular DMX receiver, using the ESP32 as a bridge between DMX and whatever it's driving: sensors, motors, or any other fixture. Currently in development, moving from schematic to PCB layout.",
+    year: "2024—Present", role: "Schematic, layout, firmware", collab: "Solo",
     media: [{label:"board photo"},{label:"pcb layout"},{label:"schematic"}],
     links: [{label:"GitHub", href:"#"}] },
   { name: "Terra Rossa", desc: "Duo Exhibition — Hamiffal, Jerusalem",
@@ -420,24 +421,24 @@ const DATA = [
   { name: "Selected Light Designs", desc: "Theatre & Festival Work",
     color: "#0a0a0a", textColor: "#ffffff",
     body: "I have been a light technician and designer for the past ten years — this is my origin of power, my passion for showing how a view of light, and its impact, can shape reality or an image. I've worked across multiple venues in Israel: Tmuna, School of Visual Theatre (Performance Convention), Hazira, Kelim, and others. I'm always eager to learn more and seek new challenges — currently working on several light designs in parallel.",
-    year: "2021—2025", role: "Lighting designer / operator", collab: "Tmuna · School of Visual Theatre · Hazira · Kelim",
+    year: "2015—Present", role: "Programmer, technician & designer", collab: "",
     media: [],
     carousel: [
-      { image: "images/lightdesigns-home1.jpg", show: "Home Shit Home", caption: "Home Shit Home — Achinoam Mendelson. Photo: Yelena Kvetny" },
-      { image: "images/lightdesigns-home2.jpg", show: "Home Shit Home", caption: "Home Shit Home — Achinoam Mendelson. Photo: Yelena Kvetny" },
-      { image: "images/lightdesigns-nonna1.jpg", show: "Nonna", caption: "Nonna — Sara. Photo: Amit Mann" },
-      { image: "images/lightdesigns-nonna2.jpg", show: "Nonna", caption: "Nonna — Sara. Photo: Amit Mann" },
-      { image: "images/lightdesigns-nonna3.jpg", show: "Nonna", caption: "Nonna — Sara. Photo: Amit Mann" },
-      { image: "images/lightdesigns-zik1.jpg", show: "As the Sun Sets in Our Region", caption: "As the Sun Sets in Our Region — Zik. Photo: Yelena Kvetny" },
-      { image: "images/lightdesigns-zik2.jpg", show: "As the Sun Sets in Our Region", caption: "As the Sun Sets in Our Region — Zik. Photo: Yelena Kvetny" },
-      { image: "images/lightdesigns-tension1.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon" },
-      { image: "images/lightdesigns-tension2.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon" },
-      { image: "images/lightdesigns-tension3.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon" },
-      { image: "images/lightdesigns-tension4.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon" }
+      { image: "images/lightdesigns-home1.jpg", show: "Home Shit Home", caption: "Home Shit Home — Achinoam Mendelson. Photo: Yelena Kvetny", focus: "center" },
+      { image: "images/lightdesigns-home2.jpg", show: "Home Shit Home", caption: "Home Shit Home — Achinoam Mendelson. Photo: Yelena Kvetny", focus: "center" },
+      { image: "images/lightdesigns-nonna1.jpg", show: "Nonna", caption: "Nonna — Sara Siegel. Photo: Amit Mann", focus: "top" },
+      { image: "images/lightdesigns-nonna2.jpg", show: "Nonna", caption: "Nonna — Sara Siegel. Photo: Amit Mann", focus: "center" },
+      { image: "images/lightdesigns-nonna3.jpg", show: "Nonna", caption: "Nonna — Sara Siegel. Photo: Amit Mann", focus: "center" },
+      { image: "images/lightdesigns-zik1.jpg", show: "As the Sun Sets in Our Region", caption: "As the Sun Sets in Our Region — Zik. Photo: Yelena Kvetny", focus: "center" },
+      { image: "images/lightdesigns-zik2.jpg", show: "As the Sun Sets in Our Region", caption: "As the Sun Sets in Our Region — Zik. Photo: Yelena Kvetny", focus: "center" },
+      { image: "images/lightdesigns-tension1.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon", focus: "center" },
+      { image: "images/lightdesigns-tension2.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon", focus: "center" },
+      { image: "images/lightdesigns-tension3.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon", focus: "center" },
+      { image: "images/lightdesigns-tension4.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon", focus: "center" }
     ],
     credits: [
       { role: "Home Shit Home", names: "Achinoam Mendelson. Photo: Yelena Kvetny" },
-      { role: "Nonna", names: "Sara. Photo: Amit Mann" },
+      { role: "Nonna", names: "Sara Siegel. Photo: Amit Mann" },
       { role: "As the Sun Sets in Our Region", names: "Zik. Photo: Yelena Kvetny" },
       { role: "Tension", names: "Yael Weiss. Photo: Tal Galon" }
     ],
