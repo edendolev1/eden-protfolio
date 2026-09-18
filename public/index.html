@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eden Dolev</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -127,8 +129,12 @@
             <span role="button" tabindex="0" onClick="{{ clear }}" style="cursor:pointer; color:#8a8a86; font-size:11px; letter-spacing:0.08em; flex:none; padding-top:8px;" style-hover="color:#0a0a0a;">CLOSE ×</span>
           </div>
 
+          <sc-if value="{{ hasStatus }}" hint-placeholder-val="{{ false }}">
+            <div style="margin:132px 0 0; font-size:15px; font-weight:700; letter-spacing:-0.01em;">{{ sel.status }}</div>
+          </sc-if>
+
           <sc-if value="{{ hasHero }}" hint-placeholder-val="{{ false }}">
-            <div class="hero-grid" style="display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:44px; align-items:start; margin:132px 0 0; max-width:900px;">
+            <div class="hero-grid" style="display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:44px; align-items:start; margin:{{ contentTopMargin }} 0 0; max-width:900px;">
               <p style="margin:0; font-size:15px; line-height:1.65; text-wrap:pretty;">{{ sel.body }}</p>
               <figure style="margin:0;">
                 <img src="{{ sel.heroImage }}" alt="{{ sel.imageCaption }}" style="display:block; width:100%; height:auto;">
@@ -138,7 +144,7 @@
           </sc-if>
 
           <sc-if value="{{ noHero }}" hint-placeholder-val="{{ true }}">
-            <p style="margin:132px 0 0; font-size:15px; line-height:1.65; max-width:560px; text-wrap:pretty;">{{ sel.body }}</p>
+            <p style="margin:{{ contentTopMargin }} 0 0; font-size:15px; line-height:1.65; max-width:560px; text-wrap:pretty;">{{ sel.body }}</p>
           </sc-if>
 
           <sc-if value="{{ hasImage }}" hint-placeholder-val="{{ false }}">
@@ -325,11 +331,11 @@ const DATA = [
       { label: "Festival page", href: "https://visualtheatre.co.il/fests/en/event/809/" }
     ] },
   { name: "DMX-Shield", desc: "ESP32 DMX / Art-Net Shield",
-    color: "#ec008c",
+    color: "#ec008c", status: "WIP",
     body: "An open-source, low-cost ESP32 shield for DMX-512 — built to work either as a DMX/Art-Net sender, bridging a computer's Art-Net output onto a real DMX line, or as a modular DMX receiver, using the ESP32 as a bridge between DMX and whatever it's driving: sensors, motors, or any other fixture. Currently in development, moving from schematic to PCB layout.",
-    year: "2024—Present", role: "Schematic, layout, firmware", collab: "Solo",
-    media: [{label:"board photo"},{label:"pcb layout"},{label:"schematic"}],
-    links: [{label:"GitHub", href:"#"}] },
+    year: "2026—Present", role: "Schematic, layout, firmware", collab: "Solo",
+    media: [],
+    links: [] },
   { name: "Terra Rossa", desc: "Duo Exhibition — Hamiffal, Jerusalem",
     color: "#e0242b",
     body: "The smell of damp red earth, revealed in the hypnotic light of neon tubes. Small creatures crawl slowly, lighting the contours of the ground with tiny lights. Time is different here, the weather is different, the world inside the gallery is different. Rotem and Eden collect elements from outside and assemble them into a new world with different laws of nature — a seductive environment that invites you to linger inside it and forget the world outside.",
@@ -420,7 +426,7 @@ const DATA = [
     ] },
   { name: "Selected Light Designs", desc: "Theatre & Festival Work",
     color: "#0a0a0a", textColor: "#ffffff",
-    body: "I have been a light technician and designer for the past ten years — this is my origin of power, my passion for showing how a view of light, and its impact, can shape reality or an image. I've worked across multiple venues in Israel: Tmuna, School of Visual Theatre (Performance Convention), Hazira, Kelim, and others. I'm always eager to learn more and seek new challenges — currently working on several light designs in parallel.",
+    body: "I have been a light technician and designer for the past ten years — this is my origin of power: my passion for showing how I perceive light, and the impact it has, on reality or on an image. I've worked across multiple venues in Israel: Tmuna, School of Visual Theatre (Performance Convention), Hazira, Kelim, and others. I'm always eager to learn more and seek new challenges — currently working on several light designs in parallel.",
     year: "2015—Present", role: "Programmer, technician & designer", collab: "",
     media: [],
     carousel: [
@@ -436,12 +442,7 @@ const DATA = [
       { image: "images/lightdesigns-tension3.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon", focus: "center" },
       { image: "images/lightdesigns-tension4.jpg", show: "Tension", caption: "Tension — Yael Weiss. Photo: Tal Galon", focus: "center" }
     ],
-    credits: [
-      { role: "Home Shit Home", names: "Achinoam Mendelson. Photo: Yelena Kvetny" },
-      { role: "Nonna", names: "Sara Siegel. Photo: Amit Mann" },
-      { role: "As the Sun Sets in Our Region", names: "Zik. Photo: Yelena Kvetny" },
-      { role: "Tension", names: "Yael Weiss. Photo: Tal Galon" }
-    ],
+    credits: [],
     links: [] }
 ];
 
@@ -663,6 +664,8 @@ class Component extends DCLogic {
       onLight: i === null ? "#ffffff" : (DATA[i].textColor || "#ffffff"),
       hasHero: i !== null && !!DATA[i].heroImage,
       noHero: i !== null && !DATA[i].heroImage,
+      hasStatus: i !== null && !!DATA[i].status,
+      contentTopMargin: (i !== null && DATA[i].status) ? "10px" : "132px",
       moments: i === null ? [] : (DATA[i].moments || []).filter(m => !m.wide),
       wideMoments: i === null ? [] : (DATA[i].moments || []).filter(m => m.wide && m.image),
       feature: i === null ? null : (DATA[i].feature || null),
