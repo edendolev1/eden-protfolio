@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Eden Dolev</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  * { box-sizing:border-box; }
+  body { color:#0a0a0a; font-family:'Open Sans', sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#0a0a0a; text-decoration:none; }
+  ::selection { background:#0a0a0a; color:#fff; }
+  :focus-visible { outline:1px solid #0a0a0a; outline-offset:3px; }
+  .shell { max-width:1040px; margin:0 auto; padding:28px 40px 64px; }
+  .home-link { font-size:13px; font-weight:400; letter-spacing:0.08em; text-transform:uppercase; color:#6e6e6a; }
+  .home-link:hover { opacity:0.55; }
+  .hero-grid { display:grid; grid-template-columns:minmax(0,1fr) 380px; gap:56px; align-items:start; margin-top:56px; }
+  .bio p { margin:0 0 20px; font-size:15px; line-height:1.7; text-wrap:pretty; }
+  .bio p:last-child { margin-bottom:0; }
+  .foot-nav { display:flex; align-items:baseline; gap:clamp(28px, 5vw, 56px); padding-top:56px; }
+  .foot-nav a { font-size:clamp(24px, 3.4vw, 36px); font-weight:300; letter-spacing:-0.02em; }
+  .foot-nav a:hover { opacity:0.55; }
+  .foot-arrow { font-size:11px; color:#8a8a86; margin-left:8px; }
+
+  @media (max-width: 720px) {
+    .shell { padding:24px 20px 48px; }
+    .hero-grid { grid-template-columns:1fr; gap:28px; margin-top:32px; }
+  }
+</style>
+</head>
+<body>
+  <div class="shell">
+    <a class="home-link" href="index.html">← Eden Dolev</a>
+
+    <div class="hero-grid">
+      <div>
+        <h1 style="margin:20px 0 0; font-size:clamp(48px, 8vw, 88px); line-height:0.95; font-weight:500; letter-spacing:-0.03em;">About</h1>
+        <div class="bio" style="margin-top:32px;">
+          <p>I am a light enthusiast. Over the past few years I've built an education that sits between art and science: a B.Sc. in Electrical Engineering &amp; Applied Physics from the Hebrew University of Jerusalem, specializing in optoelectronics — a fascinating, challenging field I'm still eager to go deeper into — and a diploma from the School of Visual Theatre (SVT), where I graduated with distinction.</p>
+          <p>At SVT I experienced years of light design and close collaboration with artists, and created the performance works you can see across this site. Since 2015 I've worked as a lighting designer and technical director for theatre and festival stages, and lately I've been spending more time in artists' studios, thinking about light together and how it links to our emotions — something that fascinates me.</p>
+          <p>I'm currently based in Jerusalem, Israel, where in my free time you'll find me at the movies, over a glass of natural wine, or a cup of specialty coffee. Every now and then my passion for light finds a new meaning and a new purpose.</p>
+          <p>I am a maker, a creator — standing on the thin line between art and technology, emotion and science, magic and equations.</p>
+        </div>
+      </div>
+      <figure style="margin:20px 0 0;">
+        <img src="images/about-eden.jpg" alt="Eden Dolev at the light board" style="display:block; width:100%; height:auto;">
+        <figcaption style="margin-top:8px; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8a8a86;">Safari — dir. Amit Drori. Photo: Yelena Kvetny</figcaption>
+      </figure>
+    </div>
+
+    <section class="foot-nav">
+      <a href="index.html">Home</a>
+      <a href="contact.html">Contact<span class="foot-arrow">↗︎</span></a>
+    </section>
+  </div>
+</body>
+</html>
