@@ -96,6 +96,7 @@
       transform:none !important;
     }
     .detail-panel { padding-left:0 !important; padding-top:150px !important; }
+    .diagram-bleed { margin-left:0 !important; width:100% !important; }
     .hero-grid { grid-template-columns:1fr !important; gap:28px !important; }
     .about-contact { flex-wrap:wrap !important; row-gap:20px !important; }
   }
@@ -179,6 +180,19 @@
               </figure>
             </div>
           </sc-for>
+
+          <sc-if value="{{ hasDiagram }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; gap:10px; margin-top:48px; max-width:900px;">
+              <div style="font-size:15px; font-weight:600; letter-spacing:-0.01em;">{{ diagram.title }}</div>
+              <p style="margin:0; font-size:14px; line-height:1.6; color:#3a3a37; max-width:620px; text-wrap:pretty;">{{ diagram.text }}</p>
+              <figure class="diagram-bleed" style="margin:10px 0 0 -132px; width:calc(100% + 132px);">
+                <a href="{{ diagram.image }}" target="_blank" rel="noopener" style="display:block; cursor:zoom-in;">
+                  <img src="{{ diagram.image }}" alt="{{ diagram.title }}" style="display:block; width:100%; height:auto;">
+                </a>
+                <figcaption style="margin-top:8px; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8a8a86;">{{ diagram.caption }}</figcaption>
+              </figure>
+            </div>
+          </sc-if>
 
           <sc-if value="{{ hasCarousel }}" hint-placeholder-val="{{ false }}">
             <div style="margin-top:40px; max-width:900px;">
@@ -275,6 +289,10 @@
           <div class="work-item" onClick="{{ s5 }}" onMouseEnter="{{ h5 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:87%; left:70%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t5 }};" style-hover="opacity:0.55;">
             <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">Selected Light Designs</div>
             <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Theatre &amp; Festival Work</div>
+          </div>
+          <div class="work-item" onClick="{{ s6 }}" onMouseEnter="{{ h6 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:6%; left:80%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t6 }};" style-hover="opacity:0.55;">
+            <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">Fire Sneakers</div>
+            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Light Objects — Tami Lebovitz, 2026</div>
           </div>
         </div>
       </sc-if>
@@ -443,10 +461,36 @@ const DATA = [
       { image: "images/lightdesigns-zik2.jpg", show: "As the Sun Sets in Our Region", caption: "As the Sun Sets in Our Region — Zik. Photo: Yelena Kvetny" }
     ],
     credits: [],
-    links: [] }
+    links: [] },
+  { name: "Fire Sneakers", desc: "Light Objects — Tami Lebovitz, 2026",
+    color: "#ff4d1a",
+    body: "Light-up sneakers for Back From Where We Came, a new dance work by choreographer Tami Lebovitz that premiered in March 2026. Inside an industrial hangar the outside is threatening and inside there is a party: the dance sweeps on and refuses to stop, through effort, concentration, fear and overcoming. The sneakers open the show: every heel strike throws a flare of fire-colored light across the floor, so the dancers' steps become the first light in the room. After them comes the rest of my light design for the piece.",
+    year: "2026", role: "Light objects, electronics, firmware and light design", collab: "For Tami Lebovitz",
+    image: "images/firesneakers-8859.jpg", media: [],
+    imageCaption: "Fire Sneakers, Back From Where We Came",
+    moments: [
+      { title: "Fire on every step", text: "A velostat pressure sensor in each heel is read by the ESP32. When the heel comes down, a flame splits outward from the middle of the 31-LED strip, five pixels each way, and keeps pulsing while the weight stays on it. Nothing repeats: every pixel picks its own shade between red and orange and its own flicker, some embers randomly drop out, and stray sparks jump elsewhere along the sole. Lift the heel and it goes dark.",
+        image: "images/firesneakers-8840.jpg", caption: "" },
+      { title: "Rebuilding the Firewalker", text: "Inspired by Adafruit's Firewalker LED sneakers, rebuilt around current parts: a Seeed XIAO ESP32-C6, small enough to disappear into the shoe; a 2000 mAh LiPo with a 5V boost converter; and a DotStar (APA102) strip, which takes its own clock line for fast, steady updates. A 74AHCT125 buffer lifts the ESP32's 3.3V data and clock up to the 5V the strip expects.",
+        image: "images/firesneakers-8848.jpg", caption: "" }
+    ],
+    diagram: { title: "Per-shoe circuit", text: "Each sneaker carries its own copy of this circuit: battery, boost, microcontroller, level shifter, heel sensor and strip, with nothing linking the two shoes.",
+      image: "images/firesneakers-schematic.png", caption: "Schematic: Eden Dolev. Click to enlarge" },
+    credits: [
+      { role: "Choreography, costumes and space", names: "Tami Lebovitz" },
+      { role: "Dancers", names: "Meshi Olinky, Inbar Buchbinder, Shira Ben Uriel" },
+      { role: "Music", names: "Bach, Guy Gutman" },
+      { role: "Light and light objects", names: "Eden Dolev" },
+      { role: "Key image", names: "Rotem Levy & Ritch" },
+      { role: "Rehearsal director", names: "Tal Adler" }
+    ],
+    links: [
+      { label: "Adafruit Firewalker (inspiration)", href: "https://learn.adafruit.com/firewalker-led-sneakers/overview" },
+      { label: "Review, Haaretz (Hebrew)", href: "https://www.haaretz.co.il/gallery/dance/review/2026-05-12/ty-article-review/.premium/0000019e-1c75-d1d4-a9bf-3f7fae870000" }
+    ] }
 ];
 
-const POS = [[5,9],[58,26],[11,44],[64,57],[34,78],[70,87]];
+const POS = [[5,9],[58,26],[11,44],[64,57],[34,78],[70,87],[80,6]];
 
 class Component extends DCLogic {
   state = { sel: null, hoverIndex: null, iris: null, carouselIndex: 0 };
@@ -676,6 +720,8 @@ class Component extends DCLogic {
       feature: i === null ? null : (DATA[i].feature || null),
       gallery: i === null ? [] : (DATA[i].gallery || []),
       hasFeature: i !== null && !!DATA[i].feature,
+      hasDiagram: i !== null && !!DATA[i].diagram,
+      diagram: i === null ? {} : (DATA[i].diagram || {}),
       hasFeatureVideo: i !== null && !!(DATA[i].feature && DATA[i].feature.videoId),
       featureVideoCaption: (i !== null && DATA[i].feature && DATA[i].feature.videoCaption) || "",
       videoRef: this.videoRef,
@@ -693,7 +739,7 @@ class Component extends DCLogic {
       unhover: () => this.hover(null),
       irisStyle: this.irisStyle()
     };
-    for (let k = 0; k < 6; k++) {
+    for (let k = 0; k < DATA.length; k++) {
       v["s" + k] = () => this.pick(k);
       v["h" + k] = () => this.hover(k);
       v["t" + k] = this.shift(k);
