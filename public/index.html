@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Eden Dolev</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script src="./nav.js" data-page="index" data-wide="1180"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -57,38 +58,87 @@
     border-color:rgba(255,255,255,0.45) !important;
   }
   @keyframes fade-in { from { opacity:0; } to { opacity:1; } }
-  @keyframes iris { from { opacity:0; transform:scale(.85); } to { opacity:1; transform:scale(1); } }
+
+  /* SAMSON, DMX-Shield, Terra Rossa, Fire Sneakers, BALASH, Pulsation, Selected Light Designs */
+  @keyframes light-hue {
+    0%, 9%, 100% { background-color:#0f22f7; }
+    14%, 23% { background-color:#ec008c; }
+    28%, 37% { background-color:#e0242b; }
+    42%, 51% { background-color:#ff4d1a; }
+    56%, 65% { background-color:#48f542; }
+    70%, 79% { background-color:#c7f1f2; }
+    84%, 93% { background-color:#0a0a0a; }
+  }
+  /* inside a work, the name leads back home */
+  .work-open .name-circle h1 { cursor:pointer; }
+  @keyframes rise { from { opacity:0; translate:0 14px; } to { opacity:1; translate:0 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .work-item { animation:none !important; }
+  }
 
   @media (max-width: 720px) {
-    .spot-cursor, #spot-layer { display:none !important; }
-    .page-shell { padding:28px 20px 64px !important; }
-    .name-circle {
+    /* the roaming light (spotRef) and the white text it reveals (#spot-layer) */
+    .spot-cursor {
       --circle-d: min(72vw, 280px);
-      display:flex !important;
-      align-items:center;
-      justify-content:center;
-      width:var(--circle-d);
-      height:var(--circle-d);
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(15,34,247,1) 0 calc(var(--circle-d) * 0.36), rgba(15,34,247,0.92) calc(var(--circle-d) * 0.43), rgba(15,34,247,0) calc(var(--circle-d) * 0.5));
-      margin:6px auto 0;
-      padding:18px;
-      text-align:center;
+      width:var(--circle-d) !important;
+      height:var(--circle-d) !important;
+      margin:calc(var(--circle-d) / -2) 0 0 calc(var(--circle-d) / -2) !important;
+      background-image:none !important;
+      background-color:#0f22f7;
+      -webkit-mask-image:radial-gradient(circle closest-side, #000 72%, rgba(0,0,0,0.92) 86%, rgba(0,0,0,0) 100%);
+      mask-image:radial-gradient(circle closest-side, #000 72%, rgba(0,0,0,0.92) 86%, rgba(0,0,0,0) 100%);
+      animation:light-hue 42s ease-in-out infinite;
     }
+    #spot-layer * { animation:none !important; }
+    .page-shell { padding:28px 20px 64px !important; }
+    /* a small heading; the light roams the page instead of sitting behind it */
+    .name-circle { display:block !important; margin:0; padding:0; text-align:left; }
     .name-circle h1 {
       margin:0 !important;
-      font-size:clamp(30px, 11vw, 46px) !important;
+      font-size:22px !important;
       line-height:1.05 !important;
-      text-align:center;
-      color:#ffffff !important;
+      letter-spacing:-0.02em !important;
+      text-align:left;
     }
-    .subtitle { text-align:center !important; margin-top:22px !important; }
+    .work-scatter { margin-top:30px; }
+    /* homepage fits the phone's visible screen exactly: name top, works in the middle, About/Contact at the bottom */
+    .site { min-height:100vh !important; min-height:100svh !important; }
+    html:not(.work-open) .page-shell {
+      display:flex !important;
+      flex-direction:column;
+      height:100vh;
+      height:100svh;
+      padding:24px 20px 26px !important;
+      overflow:hidden;
+    }
+    html:not(.work-open) .work-area {
+      flex:1 1 auto;
+      min-height:0 !important;
+      margin:0 !important;
+      padding:28px 0;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    html:not(.work-open) .work-scatter { margin-top:0; }
+    /* iPhone: no rubber-band drag on the homepage, which fits the screen anyway */
+    html:not(.work-open), html:not(.work-open) body { overscroll-behavior:none; }
+    .work-item > div { font-size:23px !important; }
+    .work-item:hover { opacity:1 !important; }
+    .work-item { animation:rise .8s cubic-bezier(.16,1,.3,1) both; }
+    .work-item:nth-child(1) { animation-delay:.15s; }
+    .work-item:nth-child(2) { animation-delay:.22s; }
+    .work-item:nth-child(3) { animation-delay:.29s; }
+    .work-item:nth-child(4) { animation-delay:.36s; }
+    .work-item:nth-child(5) { animation-delay:.43s; }
+    .work-item:nth-child(6) { animation-delay:.50s; }
+    .work-item:nth-child(7) { animation-delay:.57s; }
     .work-scatter {
       position:static !important;
       height:auto !important;
       display:flex !important;
       flex-direction:column !important;
-      gap:30px !important;
+      gap:14px !important;
     }
     .work-item {
       position:static !important;
@@ -96,6 +146,11 @@
       transform:none !important;
     }
     .detail-panel { padding-left:0 !important; padding-top:150px !important; }
+    .title-block { flex:1 1 auto; max-width:none !important; }
+    .room-title { text-align:left !important; }
+    .room-panel { padding-top:64px !important; }
+    .photo-grid { grid-template-columns:repeat(2, minmax(0, 1fr)) !important; gap:6px !important; }
+    .lightbox { padding:56px 12px 24px !important; }
     .diagram-bleed { margin-left:0 !important; width:100% !important; }
     .hero-grid { grid-template-columns:1fr !important; gap:28px !important; }
     .about-contact { flex-wrap:wrap !important; row-gap:20px !important; }
@@ -103,35 +158,34 @@
 </style>
 </helmet>
 
-<div style="position:relative; min-height:100vh; background:#ffffff; color:#0a0a0a; font-family:'Open Sans', sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden;">
+<div class="site" style="position:relative; min-height:100vh; background:#ffffff; color:#0a0a0a; font-family:'Open Sans', sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden;">
 
   <div ref="{{ spotRef }}" class="spot-cursor" style="position:fixed; top:0; left:0; width:420px; height:420px; margin:-210px 0 0 -210px; border-radius:50%; pointer-events:none; opacity:0; transition:opacity .4s ease; z-index:3;"></div>
 
-  <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
-    <div style="position:absolute; z-index:1; pointer-events:none; border-radius:50%; animation:iris .45s cubic-bezier(.16,1,.3,1); {{ irisStyle }}"></div>
+  <sc-if value="{{ hasIris }}" hint-placeholder-val="{{ false }}">
+    <div ref="{{ irisRef }}" style="position:absolute; z-index:1; pointer-events:none; border-radius:50%; {{ irisStyle }}"></div>
   </sc-if>
 
   <div ref="{{ baseRef }}" class="page-shell" style="position:relative; z-index:2; max-width:1040px; margin:0 auto; padding:12px 40px 8px;">
 
-    <div class="name-circle">
-      <h1 style="margin:0 0 0 -7px; font-size:clamp(56px, 11vw, 132px); line-height:0.92; font-weight:500; letter-spacing:-0.045em;">Eden Dolev</h1>
+    <div class="name-circle" onClick="{{ goHome }}">
+      <h1 style="margin:0 0 0 -7px; font-size:clamp(48px, 8.6vw, 106px); line-height:0.92; font-weight:500; letter-spacing:-0.045em;">Eden Dolev</h1>
     </div>
-    <p class="subtitle" style="margin:16px 0 0; font-size:15px; font-weight:400; letter-spacing:0.04em; text-transform:uppercase; color:#6e6e6a;">Performance Artist / Electronics Engineer / Light &amp; Optics</p>
 
-    <div style="position:relative; width:100%; min-height:480px; margin-top:8px;">
+    <div class="work-area" style="position:relative; width:100%; min-height:480px; margin-top:8px;">
 
       <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
-        <div class="detail-panel" style="animation:fade-in .4s ease; padding-left:132px; padding-top:130px;">
+        <div ref="{{ panelRef }}" class="detail-panel" style="animation:fade-in .4s ease; padding-left:132px; padding-top:130px;">
           <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:24px;">
-            <div ref="{{ blockRef }}" role="button" tabindex="0" onClick="{{ clear }}" style="cursor:pointer; max-width:250px; text-align:center;">
+            <div ref="{{ blockRef }}" class="title-block" role="button" tabindex="0" onClick="{{ clear }}" style="cursor:pointer; max-width:250px; text-align:center;">
               <div style="font-size:34px; font-weight:500; letter-spacing:-0.03em; line-height:1.05; color:{{ onLight }};"><span ref="{{ titleRef }}" style="display:inline-block;">{{ sel.name }}</span></div>
-              <div style="margin-top:6px; max-width:200px; margin-left:auto; margin-right:auto;"><span ref="{{ descRef }}" style="display:inline-block; font-size:11px; line-height:1.5; letter-spacing:0.08em; text-transform:uppercase; color:{{ onLight }};">{{ sel.desc }}</span></div>
+              <div style="margin-top:{{ descGap }}; max-width:220px; margin-left:auto; margin-right:auto;"><span ref="{{ descRef }}" style="display:inline-block; font-size:11px; line-height:1.5; letter-spacing:0.08em; text-transform:uppercase; color:#6e6e6a;">{{ sel.desc }}</span></div>
             </div>
             <span role="button" tabindex="0" onClick="{{ clear }}" style="cursor:pointer; color:#8a8a86; font-size:11px; letter-spacing:0.08em; flex:none; padding-top:8px;" style-hover="color:#0a0a0a;">CLOSE ×</span>
           </div>
 
           <sc-if value="{{ hasStatus }}" hint-placeholder-val="{{ false }}">
-            <div style="margin:132px 0 0; font-size:15px; font-weight:700; letter-spacing:-0.01em;">{{ sel.status }}</div>
+            <div style="margin:56px 0 0; font-size:15px; font-weight:700; letter-spacing:-0.01em;">{{ sel.status }}</div>
           </sc-if>
 
           <sc-if value="{{ hasHero }}" hint-placeholder-val="{{ false }}">
@@ -194,19 +248,23 @@
             </div>
           </sc-if>
 
-          <sc-if value="{{ hasCarousel }}" hint-placeholder-val="{{ false }}">
-            <div style="margin-top:40px; max-width:900px;">
-              <figure style="margin:0;">
-                <div style="position:relative; width:100%; aspect-ratio:4/3; overflow:hidden; background:#f4f4f2;">
-                  <img src="{{ carouselItem.image }}" alt="{{ carouselItem.caption }}" style="display:block; width:100%; height:100%; object-fit:cover;">
-                  <div role="button" tabindex="0" onClick="{{ carouselPrev }}" aria-label="Previous photo" style="position:absolute; top:50%; left:12px; transform:translateY(-50%); width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.88); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; line-height:1; color:#0a0a0a;" style-hover="background:#ffffff;">‹</div>
-                  <div role="button" tabindex="0" onClick="{{ carouselNext }}" aria-label="Next photo" style="position:absolute; top:50%; right:12px; transform:translateY(-50%); width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.88); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; line-height:1; color:#0a0a0a;" style-hover="background:#ffffff;">›</div>
+          <sc-if value="{{ hasPhotos }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; gap:44px; margin-top:44px; max-width:900px;">
+              <sc-for list="{{ showGroups }}" as="g" hint-placeholder-count="2">
+                <div>
+                  <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:4px 16px; margin-bottom:12px;">
+                    <div style="font-size:15px; font-weight:600; letter-spacing:-0.01em;">{{ g.show }}</div>
+                    <div style="font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8a8a86;">{{ g.credit }}</div>
+                  </div>
+                  <div class="photo-grid" style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:10px;">
+                    <sc-for list="{{ g.items }}" as="ph" hint-placeholder-count="3">
+                      <div role="button" tabindex="0" onClick="{{ ph.open }}" aria-label="{{ ph.caption }}" style="position:relative; aspect-ratio:4/3; overflow:hidden; background:#f4f4f2; cursor:zoom-in;">
+                        <img src="{{ ph.image }}" alt="{{ ph.caption }}" loading="lazy" style="display:block; width:100%; height:100%; object-fit:cover; transition:transform .7s cubic-bezier(.16,1,.3,1);" style-hover="transform:scale(1.04);">
+                      </div>
+                    </sc-for>
+                  </div>
                 </div>
-                <figcaption style="margin-top:8px; display:flex; justify-content:space-between; gap:12px; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8a8a86;">
-                  <span>{{ carouselItem.caption }}</span>
-                  <span style="flex:none;">{{ carouselPos }} / {{ carouselCount }}</span>
-                </figcaption>
-              </figure>
+              </sc-for>
             </div>
           </sc-if>
 
@@ -264,53 +322,140 @@
         </div>
       </sc-if>
 
-      <sc-if value="{{ noSel }}" hint-placeholder-val="{{ true }}">
+      <sc-if value="{{ hasRoom }}" hint-placeholder-val="{{ false }}">
+        <div ref="{{ panelRef }}" class="detail-panel room-panel" style="animation:fade-in .4s ease; padding-left:132px; padding-top:130px;">
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:24px;">
+            <div ref="{{ blockRef }}" class="title-block room-title" role="button" tabindex="0" onClick="{{ clear }}" style="cursor:pointer; max-width:250px; text-align:center;">
+              <div style="font-size:34px; font-weight:500; letter-spacing:-0.03em; line-height:1.05; color:#0a0a0a;"><span ref="{{ titleRef }}" style="display:inline-block;">{{ roomName }}</span></div>
+            </div>
+            <span role="button" tabindex="0" onClick="{{ clear }}" style="cursor:pointer; color:#8a8a86; font-size:11px; letter-spacing:0.08em; flex:none; padding-top:8px;" style-hover="color:#0a0a0a;">CLOSE ×</span>
+          </div>
+
+          <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+            <div class="hero-grid" style="display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:44px; align-items:start; margin:{{ roomTopMargin }} 0 0; max-width:900px;">
+              <div>
+                  <p style="margin:0 0 16px; font-size:15px; line-height:1.65; text-wrap:pretty;">I am a light enthusiast. Over the past few years I've built an education that sits between art and science: a B.Sc. in Electrical Engineering &amp; Applied Physics from the Hebrew University of Jerusalem, specializing in optoelectronics — a fascinating, challenging field I'm still eager to go deeper into — and a diploma from the School of Visual Theatre (SVT), where I graduated with distinction.</p>
+                  <p style="margin:0 0 16px; font-size:15px; line-height:1.65; text-wrap:pretty;">At SVT I experienced years of light design and close collaboration with artists, and created the performance works you can explore here. Since 2015 I've worked as a lighting designer and technical director for theatre and festival stages, and lately I've been spending more time in artists' studios, thinking about light together and how it links to our emotions — something that fascinates me.</p>
+                  <p style="margin:0 0 16px; font-size:15px; line-height:1.65; text-wrap:pretty;">I'm currently based in Jerusalem, where in my free time you'll find me at the movies, over a glass of natural wine, or a cup of specialty coffee. Every now and then my passion for light finds a new meaning and a new purpose.</p>
+                  <p style="margin:0 0 16px; font-size:15px; line-height:1.65; text-wrap:pretty;">I am a maker, a creator — standing on the thin line between art and technology, emotion and science, magic and equations.</p>
+              </div>
+              <figure style="margin:0;">
+                <img src="images/about-eden.jpg" alt="Eden Dolev at the light board" style="display:block; width:100%; height:auto;">
+                <figcaption style="margin-top:8px; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8a8a86;">Safari — dir. Amit Drori. Photo: Yelena Kvetny</figcaption>
+              </figure>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+            <div class="hero-grid" style="display:grid; grid-template-columns:minmax(0,1fr) 400px; gap:44px; align-items:start; margin:{{ roomTopMargin }} 0 0; max-width:900px;">
+              <div>
+                <p style="margin:0; font-size:15px; line-height:1.65; text-wrap:pretty;">Feel free to reach out — for a question, a consultation, an interesting article, or a job proposal. I'm eager to collaborate and to help, both technologically and artistically, and curious to hear your thoughts. If you'd like to use one of my projects, or want to know how I built one of them, send me a message too.</p>
+                <a href="mailto:eden.dolev1@gmail.com" style="display:inline-block; margin-top:26px; font-size:22px; letter-spacing:-0.01em; border-bottom:1px solid #d8d8d5;" style-hover="border-bottom:1px solid #0a0a0a;">eden.dolev1@gmail.com</a>
+              <div style="display:flex; gap:18px; margin-top:28px;">
+                <a href="https://www.instagram.com/_edendolev/" target="_blank" rel="noopener" style="color:#8a8a86; display:flex;" style-hover="color:#0a0a0a;" aria-label="Instagram">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/>
+                    <circle cx="12" cy="12" r="4.2"/>
+                    <circle cx="17.2" cy="6.8" r="0.7" fill="currentColor" stroke="none"/>
+                  </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/eden-dolev-4805491b7/" target="_blank" rel="noopener" style="color:#8a8a86; display:flex;" style-hover="color:#0a0a0a;" aria-label="LinkedIn">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/>
+                    <line x1="7.5" y1="10" x2="7.5" y2="17"/>
+                    <circle cx="7.5" cy="6.9" r="0.9" fill="currentColor" stroke="none"/>
+                    <path d="M11.3 17v-4.3c0-1.6 1-2.6 2.35-2.6 1.3 0 2.05.9 2.05 2.6V17"/>
+                    <line x1="11.3" y1="10" x2="11.3" y2="17"/>
+                  </svg>
+                </a>
+                <a href="https://www.youtube.com/@EDENDOLEV007" target="_blank" rel="noopener" style="color:#8a8a86; display:flex;" style-hover="color:#0a0a0a;" aria-label="YouTube">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/>
+                    <path d="M10 8.7l5.4 3.3-5.4 3.3z" fill="currentColor" stroke="none"/>
+                  </svg>
+                </a>
+                <a href="https://www.facebook.com/eden.dolev2" target="_blank" rel="noopener" style="color:#8a8a86; display:flex;" style-hover="color:#0a0a0a;" aria-label="Facebook">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/>
+                    <path d="M15.6 8h-1.3c-1.05 0-1.7.65-1.7 1.7V17"/>
+                    <path d="M11 12.3h4.3"/>
+                  </svg>
+                </a>
+                <a href="https://github.com/edendolev1" target="_blank" rel="noopener" style="color:#8a8a86; display:flex;" style-hover="color:#0a0a0a;" aria-label="GitHub">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/>
+                    <g transform="translate(5.4,5.4) scale(0.55)">
+                      <path fill="currentColor" stroke="none" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                    </g>
+                  </svg>
+                </a>
+              </div>
+              </div>
+              <figure style="margin:0;">
+                <img src="images/contact-balash.jpg" alt="From BALASH" style="display:block; width:100%; height:auto;">
+                <figcaption style="margin-top:8px; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8a8a86;">From BALASH. Presented at Compasses, Performance Convention 2025. Photo: Amit Mann</figcaption>
+              </figure>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
         <div class="work-scatter" style="position:relative; width:100%; height:480px;">
-          <div class="work-item" onClick="{{ s0 }}" onMouseEnter="{{ h0 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:9%; left:5%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t0 }};" style-hover="opacity:0.55;">
-            <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">BALASH</div>
-            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Detective Performance — SVT Finale 2025</div>
+          <div class="work-item" onClick="{{ s0 }}" onMouseEnter="{{ h0 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:9%; left:5%; cursor:pointer; max-width:300px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t0 }};" style-hover="opacity:0.55;">
+            <div style="font-size:26px; font-weight:300; letter-spacing:-0.02em; line-height:1.1;">BALASH</div>
           </div>
-          <div class="work-item" onClick="{{ s1 }}" onMouseEnter="{{ h1 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:26%; left:58%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t1 }};" style-hover="opacity:0.55;">
-            <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">DMX-Shield</div>
-            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">ESP32 DMX / Art-Net Shield</div>
+          <div class="work-item" onClick="{{ s1 }}" onMouseEnter="{{ h1 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:26%; left:58%; cursor:pointer; max-width:300px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t1 }};" style-hover="opacity:0.55;">
+            <div style="font-size:26px; font-weight:300; letter-spacing:-0.02em; line-height:1.1;">DMX-Shield</div>
           </div>
-          <div class="work-item" onClick="{{ s2 }}" onMouseEnter="{{ h2 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:44%; left:11%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t2 }};" style-hover="opacity:0.55;">
-            <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">Terra Rossa</div>
-            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Duo Exhibition — Hamiffal, Jerusalem</div>
+          <div class="work-item" onClick="{{ s2 }}" onMouseEnter="{{ h2 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:44%; left:11%; cursor:pointer; max-width:300px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t2 }};" style-hover="opacity:0.55;">
+            <div style="font-size:26px; font-weight:300; letter-spacing:-0.02em; line-height:1.1;">Terra Rossa</div>
           </div>
-          <div class="work-item" onClick="{{ s3 }}" onMouseEnter="{{ h3 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:57%; left:64%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t3 }};" style-hover="opacity:0.55;">
-            <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">SAMSON</div>
-            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Solo Performance — SVT Marathon 2024</div>
+          <div class="work-item" onClick="{{ s3 }}" onMouseEnter="{{ h3 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:57%; left:64%; cursor:pointer; max-width:300px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t3 }};" style-hover="opacity:0.55;">
+            <div style="font-size:26px; font-weight:300; letter-spacing:-0.02em; line-height:1.1;">SAMSON</div>
           </div>
-          <div class="work-item" onClick="{{ s4 }}" onMouseEnter="{{ h4 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:78%; left:34%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t4 }};" style-hover="opacity:0.55;">
-            <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">Pulsation</div>
-            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Marliman Collective — Beita, Jerusalem</div>
+          <div class="work-item" onClick="{{ s4 }}" onMouseEnter="{{ h4 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:78%; left:34%; cursor:pointer; max-width:300px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t4 }};" style-hover="opacity:0.55;">
+            <div style="font-size:26px; font-weight:300; letter-spacing:-0.02em; line-height:1.1;">Pulsation</div>
           </div>
-          <div class="work-item" onClick="{{ s5 }}" onMouseEnter="{{ h5 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:87%; left:70%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t5 }};" style-hover="opacity:0.55;">
-            <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">Selected Light Designs</div>
-            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Theatre &amp; Festival Work</div>
+          <div class="work-item" onClick="{{ s5 }}" onMouseEnter="{{ h5 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:87%; left:70%; cursor:pointer; max-width:300px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t5 }};" style-hover="opacity:0.55;">
+            <div style="font-size:26px; font-weight:300; letter-spacing:-0.02em; line-height:1.1;">Selected Light Designs</div>
           </div>
-          <div class="work-item" onClick="{{ s6 }}" onMouseEnter="{{ h6 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:6%; left:80%; cursor:pointer; max-width:230px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t6 }};" style-hover="opacity:0.55;">
-            <div style="font-size:17px; font-weight:500; letter-spacing:-0.01em;">Fire Sneakers</div>
-            <div style="font-size:10px; letter-spacing:0.05em; text-transform:uppercase; margin-top:3px; color:#6e6e6a;">Light Objects — Tami Lebovitz, 2026</div>
+          <div class="work-item" onClick="{{ s6 }}" onMouseEnter="{{ h6 }}" onMouseLeave="{{ unhover }}" style="position:absolute; top:6%; left:80%; cursor:pointer; max-width:300px; transition:transform .35s cubic-bezier(.2,.7,.3,1), opacity .3s ease; transform:{{ t6 }};" style-hover="opacity:0.55;">
+            <div style="font-size:26px; font-weight:300; letter-spacing:-0.02em; line-height:1.1;">Fire Sneakers</div>
           </div>
         </div>
       </sc-if>
 
     </div>
 
-    <section class="about-contact" style="display:flex; align-items:baseline; gap:clamp(32px, 6vw, 80px); padding-top:8px;">
-      <a href="about.html" style="display:flex; align-items:baseline; gap:10px;" style-hover="opacity:0.5;">
-        <span style="font-size:clamp(30px, 4.4vw, 48px); line-height:1; font-weight:300; letter-spacing:-0.03em;">About</span>
-        <span style="font-size:11px; color:#8a8a86;">↗︎</span>
-      </a>
-      <a href="contact.html" style="display:flex; align-items:baseline; gap:10px;" style-hover="opacity:0.5;">
-        <span style="font-size:clamp(30px, 4.4vw, 48px); line-height:1; font-weight:300; letter-spacing:-0.03em;">Contact</span>
-        <span style="font-size:11px; color:#8a8a86;">↗︎</span>
-      </a>
-    </section>
+    <!-- only on the homepage; inside a work the side bar / Index menu already has About and Contact -->
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <section class="about-contact" style="display:flex; align-items:baseline; gap:clamp(32px, 6vw, 80px); padding-top:8px;">
+        <a href="#about" onClick="{{ goAbout }}" style="display:flex; align-items:baseline; gap:10px;" style-hover="opacity:0.5;">
+          <span style="font-size:26px; line-height:1.1; font-weight:300; letter-spacing:-0.02em;">About</span>
+          <span style="font-size:11px; color:#8a8a86;">↗︎</span>
+        </a>
+        <a href="#contact" onClick="{{ goContact }}" style="display:flex; align-items:baseline; gap:10px;" style-hover="opacity:0.5;">
+          <span style="font-size:26px; line-height:1.1; font-weight:300; letter-spacing:-0.02em;">Contact</span>
+          <span style="font-size:11px; color:#8a8a86;">↗︎</span>
+        </a>
+      </section>
+    </sc-if>
 
   </div>
+
+  <sc-if value="{{ hasLightbox }}" hint-placeholder-val="{{ false }}">
+    <div class="lightbox" role="dialog" aria-label="Photo" onClick="{{ closePhoto }}" style="position:fixed; inset:0; z-index:70; background:rgba(10,10,10,0.94); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:40px 84px; cursor:zoom-out; animation:fade-in .3s ease;">
+      <img src="{{ photo.image }}" alt="{{ photo.caption }}" style="display:block; max-width:100%; max-height:calc(100vh - 120px); object-fit:contain;">
+      <div style="display:flex; justify-content:space-between; gap:16px; width:100%; max-width:900px; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#a8a8a4;">
+        <span>{{ photo.caption }}</span>
+        <span style="flex:none;">{{ photoPos }} / {{ photoCount }}</span>
+      </div>
+      <div role="button" tabindex="0" onClick="{{ photoPrev }}" aria-label="Previous photo" style="position:absolute; top:50%; left:20px; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:24px; line-height:1; color:#ffffff; background:rgba(255,255,255,0.08);" style-hover="background:rgba(255,255,255,0.2);">‹</div>
+      <div role="button" tabindex="0" onClick="{{ photoNext }}" aria-label="Next photo" style="position:absolute; top:50%; right:20px; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:24px; line-height:1; color:#ffffff; background:rgba(255,255,255,0.08);" style-hover="background:rgba(255,255,255,0.2);">›</div>
+      <span role="button" tabindex="0" onClick="{{ closePhoto }}" style="position:absolute; top:18px; right:22px; font-size:11px; letter-spacing:0.08em; color:#a8a8a4; cursor:pointer;" style-hover="color:#ffffff;">CLOSE ×</span>
+    </div>
+  </sc-if>
 
   <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#ffffff"/><circle cx="50" cy="50" r="26" fill="#0f22f7"/><text x="50" y="57" text-anchor="middle" font-family="sans-serif" font-size="19" font-weight="600" fill="#ffffff">ED</text></svg></template>
 
@@ -323,7 +468,7 @@ const DATA = [
   { name: "BALASH", desc: "Detective Performance — SVT Finale 2025",
     body: "A detective investigation performance that gradually falls apart into live documentary. I from the past am calling out of a terrible memory to myself in the present, asking that I come and save me. Three detectives set out on a journey to search for me. On their way they expose repressed and enigmatic inner worlds, and discover other mysteries too: of creation and of art. In the end, the detectives try to repair what can no longer be repaired. But perhaps out of the attempt itself, something else can be repaired — something that cannot be explained in words.",
     year: "2025", role: "Creator, performer, light and electronics", collab: "School of Visual Theatre, Jerusalem",
-    color: "#48f542", textColor: "#0a0a0a",
+    color: "#48f542",
     image: "images/balash-catalog.jpg", media: [],
     imageCaption: "BALASH, Finale 2025, School of Visual Theatre. Photo: Amit Mann",
     moments: [
@@ -414,7 +559,7 @@ const DATA = [
       { label: "Festival page", href: "https://visualtheatre.co.il/fests/event/468/" }
     ] },
   { name: "Pulsation", desc: "Marliman Collective — Beita, Jerusalem",
-    color: "#c7f1f2", textColor: "#0a0a0a",
+    color: "#c7f1f2",
     body: "A group exhibition built as one machine. Four of us worked as Marliman Collective — Talia Hamburg, Amit Oddes, Yehonatan David and myself — and each work was a part in a single mechanism: one piece set the tempo, the next split it into paths, and the paths fed each other for the length of the show. The recurring element is the stone. My two parts of the machine were The Quarry, a 3D printer that mined stones for the duration of the exhibition, and Ballerinas, six mirrors on copper poles that scattered Talia's video across the room.",
     year: "2024", role: "The Quarry and Ballerinas — electronics, motion control, print pipeline", collab: "Marliman Collective. Curator: Lital Marcus Morin",
     image: "images/pulsation-room.jpg", media: [],
@@ -447,7 +592,7 @@ const DATA = [
     body: "I have been a light technician and designer for the past ten years — this is my origin of power: my passion for showing how I perceive light, and the impact it has, on reality or on an image. I've worked across multiple venues in Israel: Tmuna, School of Visual Theatre (Performance Convention), Hazira, Kelim, and others. I'm always eager to learn more and seek new challenges — currently working on several light designs in parallel.",
     year: "2015—Present", role: "Programmer, technician & designer", collab: "",
     media: [],
-    carousel: [
+    photos: [
       { image: "images/lightdesigns-nonna2.jpg", show: "Nonna", caption: "Nonna — Sara Siegel. Photo: Amit Mann" },
       { image: "images/lightdesigns-nonna1.jpg", show: "Nonna", caption: "Nonna — Sara Siegel. Photo: Amit Mann" },
       { image: "images/lightdesigns-nonna3.jpg", show: "Nonna", caption: "Nonna — Sara Siegel. Photo: Amit Mann" },
@@ -490,10 +635,12 @@ const DATA = [
     ] }
 ];
 
+const ROOMS = { about: "About", contact: "Contact" };
+
 const POS = [[5,9],[58,26],[11,44],[64,57],[34,78],[70,87],[80,6]];
 
 class Component extends DCLogic {
-  state = { sel: null, hoverIndex: null, iris: null, carouselIndex: 0 };
+  state = { sel: null, room: null, hoverIndex: null, iris: null, photo: null };
   isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 720px)").matches;
   spotRef = React.createRef();
   baseRef = React.createRef();
@@ -502,14 +649,18 @@ class Component extends DCLogic {
   descRef = React.createRef();
   blockRef = React.createRef();
   videoRef = React.createRef();
+  irisRef = React.createRef();
+  panelRef = React.createRef();
 
   mountVideo() {
     const host = this.videoRef.current;
     const i = this.state.sel;
     const f = i === null ? null : DATA[i].feature;
     if (!host || !f || !f.videoId) { this._vid = null; return; }
-    if (this._vidHost === host) return;
+    if (this._vidHost === host && this._vidFor === i) return;
     this._vidHost = host;
+    this._vidFor = i;
+    host.innerHTML = "";
     if (this._vidObserver) this._vidObserver.disconnect();
     if (this._vidMessageHandler) window.removeEventListener("message", this._vidMessageHandler);
     const frame = document.createElement("iframe");
@@ -559,11 +710,110 @@ class Component extends DCLogic {
     }
     window.addEventListener("scroll", this.onScroll, { passive: true });
     window.addEventListener("resize", this.onResize);
+    this.onPop = () => this.go(this.fromHash(), false);
+    window.addEventListener("popstate", this.onPop);
+    window.__openWork = (i) => this.go(i, true);
+    this.onKey = (e) => {
+      if (this.state.photo === null) return;
+      if (e.key === "Escape") this.showPhoto(null);
+      else if (e.key === "ArrowLeft") this.showPhoto(this.state.photo - 1);
+      else if (e.key === "ArrowRight") this.showPhoto(this.state.photo + 1);
+    };
+    window.addEventListener("keydown", this.onKey);
     this.sync();
+    const start = this.fromHash();
+    if (start !== null) { this.go(start, false); this._flyFrom = null; }
+    else this.roamStart();
+  }
+
+  slug(i) {
+    if (typeof i === "string") return i;
+    return DATA[i].name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+
+  // What is open: a work's index, "about", "contact", or null for the homepage.
+  current() { return this.state.sel !== null ? this.state.sel : this.state.room; }
+
+  fromHash() {
+    const h = decodeURIComponent((window.location.hash || "").slice(1));
+    if (ROOMS[h]) return h;
+    for (let k = 0; k < DATA.length; k++) if (this.slug(k) === h) return k;
+    return null;
+  }
+
+  // Open work i (or go back to the homepage with null). push: add a history entry,
+  // so the browser back button walks back through the rooms visited.
+  go(i, push) {
+    if (push) {
+      const url = i === null ? window.location.pathname + window.location.search : "#" + this.slug(i);
+      if (i !== this.fromHash()) window.history.pushState(null, "", url);
+    }
+    if (i === this.current()) return;
+    const nav = window.MuseumNav;
+    if (nav && !this.isMobile) {
+      // homepage titles fly into the side bar, and back out of it on the way home
+      this._flyFrom = this.current() === null && this.baseRef.current
+        ? Array.from(this.baseRef.current.querySelectorAll(".work-item")).map(t => nav.snap(t.firstElementChild))
+        : null;
+      this._flyBack = i === null ? nav.snapshot() : null;
+    }
+    window.scrollTo(0, 0);
+    if (this.state.photo !== null) document.documentElement.style.overflow = "";
+    if (i === null) { this.setState({ sel: null, room: null, iris: null, photo: null }); return; }
+    if (typeof i === "string") this.setState({ sel: null, room: i, iris: null, photo: null });
+    else this.setState({ sel: i, room: null, iris: null, photo: null });
+    if (this.spotRef.current) this.spotRef.current.style.opacity = 0;
+    if (this.overRef.current) this.overRef.current.style.opacity = 0;
+    document.documentElement.style.setProperty("--spot-r", "0px");
+    clearTimeout(this._remeasure);
+    this._remeasure = setTimeout(() => this.measure(), 500);
+  }
+
+  // Runs once per newly opened work: the light blooms first, then the name settles into it.
+  intro() {
+    const sel = this.current();
+    if (sel !== this._shownSel) {
+      const switched = this._shownSel !== null && this._shownSel !== undefined && sel !== null;
+      this._shownSel = sel;
+      this._irisPlayed = false;
+      if (window.MuseumNav) window.MuseumNav.setActive(sel, this._flyFrom);
+      this._flyFrom = null;
+      if (sel === null && this._flyBack && this.baseRef.current) {
+        const tiles = Array.from(this.baseRef.current.querySelectorAll(".work-item"));
+        const to = tiles.map(t => window.MuseumNav.snap(t.firstElementChild));
+        // the white copy under the light hides with them, so it doesn't show ahead of the flyers
+        tiles.forEach(t => { t.style.visibility = "hidden"; });
+        this.sync();
+        window.MuseumNav.fly(this._flyBack, to, () => { tiles.forEach(t => { t.style.visibility = ""; }); this.sync(); });
+      }
+      this._flyBack = null;
+      document.documentElement.classList.toggle("work-open", sel !== null);
+      if (sel === null) this.roamStart(); else this.roamStop();
+      if (sel !== null && switched && this.panelRef.current) {
+        this.panelRef.current.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, easing: "ease" });
+      }
+      if (sel !== null && this.isMobile) {
+        const ease = "cubic-bezier(.16,1,.3,1)";
+        if (this.titleRef.current) this.titleRef.current.animate(
+          [{ opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0)" }],
+          { duration: 650, delay: 420, easing: ease, fill: "backwards" });
+        if (this.descRef.current) this.descRef.current.animate(
+          [{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "none" }],
+          { duration: 600, delay: 760, easing: ease, fill: "backwards" });
+      }
+    }
+    if (sel !== null && this.state.iris && !this._irisPlayed && this.irisRef.current) {
+      this._irisPlayed = true;
+      this.irisRef.current.animate(this.isMobile
+        ? [{ opacity: 0, transform: "scale(.12)" }, { opacity: 1, transform: "scale(1.06)", offset: 0.75 }, { opacity: 1, transform: "scale(1)" }]
+        : [{ opacity: 0, transform: "scale(.85)" }, { opacity: 1, transform: "scale(1)" }],
+        { duration: this.isMobile ? 800 : 450, easing: "cubic-bezier(.16,1,.3,1)" });
+    }
   }
   componentDidUpdate() {
     this.sync();
     this.measure();
+    this.intro();
     if (this.state.sel === null) {
       if (this._vidObserver) { this._vidObserver.disconnect(); this._vidObserver = null; }
       if (this._vidMessageHandler) { window.removeEventListener("message", this._vidMessageHandler); this._vidMessageHandler = null; }
@@ -577,12 +827,15 @@ class Component extends DCLogic {
     window.removeEventListener("scroll", this.onScroll);
     window.removeEventListener("resize", this.onResize);
     if (this.onLeave) document.removeEventListener("mouseleave", this.onLeave);
+    window.removeEventListener("popstate", this.onPop);
+    window.removeEventListener("keydown", this.onKey);
+    this.roamStop();
     if (this._vidObserver) this._vidObserver.disconnect();
     if (this._vidMessageHandler) window.removeEventListener("message", this._vidMessageHandler);
   }
 
   measure() {
-    if (this.state.sel === null) return;
+    if (this.current() === null) return;
     const t = this.titleRef.current, b = this.blockRef.current;
     if (!t || !b) return;
     let tr = t.getBoundingClientRect();
@@ -592,10 +845,7 @@ class Component extends DCLogic {
       const g = rng.getBoundingClientRect();
       if (g.width > 0) tr = g;
     }
-    const br = b.getBoundingClientRect();
-    const d = this.descRef.current;
     const rects = [tr];
-    if (d) rects.push(d.getBoundingClientRect());
     const vx = tr.left + tr.width / 2;
     const vy = tr.top + tr.height / 2;
     const cx = vx + window.scrollX;
@@ -607,44 +857,52 @@ class Component extends DCLogic {
       });
     });
     const n = Math.round((reach + 30) * 2);
+    const gap = Math.max(10, Math.round(n * 0.5 + 2 - tr.height / 2));
     const prev = this.state.iris;
-    if (prev && Math.abs(prev.cx - cx) < 1 && Math.abs(prev.cy - cy) < 1 && prev.n === n) return;
-    this.setState({ iris: { cx, cy, n } });
+    if (prev && Math.abs(prev.cx - cx) < 1 && Math.abs(prev.cy - cy) < 1 && prev.n === n && prev.gap === gap) return;
+    this.setState({ iris: { cx, cy, n, gap } });
   }
 
   fade(v) {
-    if (this.isMobile) return;
-    const val = this.state.sel !== null ? 0 : v;
+    const val = this.current() !== null ? 0 : v;
     if (this.spotRef.current) this.spotRef.current.style.opacity = val;
     if (this.overRef.current) this.overRef.current.style.opacity = val;
+    // titles flying in from the side bar (nav.js) turn white inside this circle
+    document.documentElement.style.setProperty("--spot-r", (val ? this._rad || 0 : 0) + "px");
   }
 
   size() { return this.props.spotSize ?? 420; }
   color() { return this.props.spotColor ?? "#0f22f7"; }
 
-  place(x, y) {
-    if (this.isMobile) return;
+  place(x, y, scale) {
     const s = this.spotRef.current, o = this.overRef.current;
     if (!s) return;
+    const k = scale || 1;
     s.style.left = x + "px";
     s.style.top = y + "px";
+    if (this.isMobile) s.style.transform = "scale(" + k + ")";
     if (o) {
       const r = o.getBoundingClientRect();
-      const rad = this.size() / 2;
+      const rad = (this.isMobile ? s.offsetWidth : this.size()) / 2 * k;
       const mask = "radial-gradient(circle " + rad + "px at " + (x - r.left) + "px " + (y - r.top) + "px, #000 0 " + (rad * 0.72) + "px, rgba(0,0,0,0) " + (rad * 0.86) + "px)";
       o.style.webkitMaskImage = mask;
       o.style.maskImage = mask;
     }
+    this._rad = (this.isMobile ? s.offsetWidth : this.size()) / 2 * k;
+    document.documentElement.style.setProperty("--spot-x", x + "px");
+    document.documentElement.style.setProperty("--spot-y", y + "px");
     this.fade(1);
   }
 
   sync() {
-    if (this.isMobile) return;
+    if (this.isMobile && !this._roam) return;
     const b = this.baseRef.current, o = this.overRef.current, s = this.spotRef.current;
-    if (o && b && this.state.sel === null) {
-      o.innerHTML = "<div style=\"max-width:1040px;margin:0 auto;padding:12px 40px 8px;\">" + b.innerHTML + "</div>";
+    if (o && b && this.current() === null) {
+      // padding must match .page-shell (desktop inline style / mobile media query)
+      const pad = this.isMobile ? "28px 20px 64px" : "12px 40px 8px";
+      o.innerHTML = "<div class=\"page-shell\" style=\"max-width:1040px;margin:0 auto;padding:" + pad + ";\">" + b.innerHTML + "</div>";
     }
-    if (s) {
+    if (s && !this.isMobile) {
       const c = this.color(), n = this.size();
       s.style.width = n + "px";
       s.style.height = n + "px";
@@ -655,31 +913,68 @@ class Component extends DCLogic {
     }
   }
 
+  // Mobile homepage: the light leaves the name and scans the page on its own, like a
+  // moving head: smooth sweeps between random points, short holds, a little zoom.
+  roamStart() {
+    if (!this.isMobile || this._roam || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const nameEl = this.baseRef.current && this.baseRef.current.querySelector(".name-circle");
+    const nr = nameEl ? nameEl.getBoundingClientRect() : null;
+    const home = nr ? { x: nr.left + nr.width / 2, y: nr.top + nr.height / 2, s: 1 } : { x: innerWidth / 2, y: innerHeight / 3, s: 1 };
+    let from = home, to = home, t0 = performance.now(), dur = 1, hold = 1400;
+    const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    const next = () => {
+      const d = this.spotRef.current ? this.spotRef.current.offsetWidth : 280;
+      const m = d * 0.15;
+      const target = {
+        x: m + Math.random() * Math.max(1, innerWidth - 2 * m),
+        y: m + Math.random() * Math.max(1, innerHeight - 2 * m),
+        s: 0.82 + Math.random() * 0.32
+      };
+      dur = 1500 + Math.hypot(target.x - to.x, target.y - to.y) * 6;
+      hold = Math.random() < 0.45 ? 250 + Math.random() * 1100 : 0;
+      from = to;
+      to = target;
+    };
+    document.documentElement.classList.add("roaming");
+    this._roam = requestAnimationFrame(() => {});
+    this.sync();
+    const step = (now) => {
+      const k = Math.min(1, Math.max(0, (now - t0 - hold) / dur));
+      const e = ease(k);
+      this.place(from.x + (to.x - from.x) * e, from.y + (to.y - from.y) * e, from.s + (to.s - from.s) * e);
+      if (k >= 1) { next(); t0 = now; }
+      this._roam = requestAnimationFrame(step);
+    };
+    this._roam = requestAnimationFrame(step);
+  }
+
+  roamStop() {
+    if (!this._roam) return;
+    cancelAnimationFrame(this._roam);
+    this._roam = null;
+    document.documentElement.classList.remove("roaming");
+    this.fade(0);
+  }
+
   rgba(h, a) {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h);
     if (!m) return h;
     return "rgba(" + parseInt(m[1],16) + "," + parseInt(m[2],16) + "," + parseInt(m[3],16) + "," + a + ")";
   }
 
-  pick(i) {
-    const willOpen = this.state.sel !== i;
-    this.setState(st => (st.sel === i ? { sel: null, iris: null } : { sel: i, iris: null, carouselIndex: 0 }));
-    if (willOpen) {
-      if (this.spotRef.current) this.spotRef.current.style.opacity = 0;
-      if (this.overRef.current) this.overRef.current.style.opacity = 0;
-    }
-    clearTimeout(this._remeasure);
-    this._remeasure = setTimeout(() => this.measure(), 500);
+  hover(i) {
+    // touch screens: a tap fires "hover" first; re-rendering there makes iOS eat the tap
+    if (this.isMobile || !window.matchMedia("(hover:hover)").matches) return;
+    if (this.state.hoverIndex !== i) this.setState({ hoverIndex: i });
   }
 
-  hover(i) { this.setState({ hoverIndex: i }); }
-
-  carouselStep(dir) {
+  // Full-size photo viewer for a work's photo grid (null = closed).
+  showPhoto(k) {
     const i = this.state.sel;
-    if (i === null) return;
-    const arr = DATA[i].carousel || [];
-    if (!arr.length) return;
-    this.setState(st => ({ carouselIndex: ((st.carouselIndex || 0) + dir + arr.length) % arr.length }));
+    const arr = i === null ? [] : (DATA[i].photos || []);
+    if (k !== null && !arr.length) return;
+    this.setState({ photo: k === null ? null : (k + arr.length) % arr.length });
+    document.documentElement.style.overflow = k === null ? "" : "hidden";
   }
 
   shift(k) {
@@ -701,20 +996,45 @@ class Component extends DCLogic {
     return "top:" + s.cy + "px; left:" + s.cx + "px; width:" + s.n + "px; height:" + s.n + "px; margin:" + (-s.n / 2) + "px 0 0 " + (-s.n / 2) + "px; background:" + bg + ";";
   }
 
+  // Photos grouped by show, in the order they first appear; credit = caption after the show name.
+  showGroups(photos) {
+    const groups = [];
+    photos.forEach((ph, k) => {
+      let g = groups.find(x => x.show === ph.show);
+      if (!g) {
+        g = { show: ph.show, credit: ph.caption.split(" — ").slice(1).join(" — "), items: [] };
+        groups.push(g);
+      }
+      g.items.push({ image: ph.image, caption: ph.caption, open: () => this.showPhoto(k) });
+    });
+    return groups;
+  }
+
   renderVals() {
     const i = this.state.sel;
+    const photos = i === null ? [] : (DATA[i].photos || []);
     const v = {
       spotRef: this.spotRef, baseRef: this.baseRef, overRef: this.overRef,
       titleRef: this.titleRef, descRef: this.descRef, blockRef: this.blockRef,
       hasSel: i !== null,
       noSel: i === null,
+      hasIris: i !== null,
+      isHome: this.current() === null,
+      hasRoom: this.state.room !== null,
+      isAbout: this.state.room === "about",
+      isContact: this.state.room === "contact",
+      roomName: this.state.room ? ROOMS[this.state.room] : "",
+      roomTopMargin: "48px",
+      goAbout: (e) => { if (e && e.preventDefault) e.preventDefault(); this.go("about", true); },
+      goContact: (e) => { if (e && e.preventDefault) e.preventDefault(); this.go("contact", true); },
       sel: i === null ? {} : DATA[i],
       hasImage: i !== null && !!DATA[i].image,
       onLight: i === null ? "#ffffff" : (DATA[i].textColor || "#ffffff"),
       hasHero: i !== null && !!DATA[i].heroImage,
       noHero: i !== null && !DATA[i].heroImage,
       hasStatus: i !== null && !!DATA[i].status,
-      contentTopMargin: (i !== null && DATA[i].status) ? "10px" : "132px",
+      contentTopMargin: (i !== null && DATA[i].status) ? "10px" : "56px",
+      descGap: this.state.iris ? this.state.iris.gap + "px" : "64px",
       moments: i === null ? [] : (DATA[i].moments || []).filter(m => !m.wide),
       wideMoments: i === null ? [] : (DATA[i].moments || []).filter(m => m.wide && m.image),
       feature: i === null ? null : (DATA[i].feature || null),
@@ -725,22 +1045,25 @@ class Component extends DCLogic {
       hasFeatureVideo: i !== null && !!(DATA[i].feature && DATA[i].feature.videoId),
       featureVideoCaption: (i !== null && DATA[i].feature && DATA[i].feature.videoCaption) || "",
       videoRef: this.videoRef,
+      irisRef: this.irisRef, panelRef: this.panelRef,
       credits: i === null ? [] : (DATA[i].credits || []),
       media: i === null ? [] : (DATA[i].media || []),
-      hasCarousel: i !== null && !!(DATA[i].carousel && DATA[i].carousel.length),
-      carouselItem: (i !== null && DATA[i].carousel && DATA[i].carousel.length)
-        ? DATA[i].carousel[(this.state.carouselIndex || 0) % DATA[i].carousel.length]
-        : {},
-      carouselPos: (this.state.carouselIndex || 0) + 1,
-      carouselCount: i === null ? 0 : ((DATA[i].carousel || []).length),
-      carouselPrev: () => this.carouselStep(-1),
-      carouselNext: () => this.carouselStep(1),
-      clear: () => this.setState({ sel: null, iris: null }),
+      hasPhotos: photos.length > 0,
+      showGroups: this.showGroups(photos),
+      hasLightbox: this.state.photo !== null && photos.length > 0,
+      photo: this.state.photo !== null && photos[this.state.photo] ? photos[this.state.photo] : {},
+      photoPos: (this.state.photo || 0) + 1,
+      photoCount: photos.length,
+      photoPrev: (e) => { e.stopPropagation(); this.showPhoto(this.state.photo - 1); },
+      photoNext: (e) => { e.stopPropagation(); this.showPhoto(this.state.photo + 1); },
+      closePhoto: (e) => { e.stopPropagation(); this.showPhoto(null); },
+      clear: () => this.go(null, true),
+      goHome: () => { if (this.current() !== null) this.go(null, true); },
       unhover: () => this.hover(null),
       irisStyle: this.irisStyle()
     };
     for (let k = 0; k < DATA.length; k++) {
-      v["s" + k] = () => this.pick(k);
+      v["s" + k] = () => this.go(k, true);
       v["h" + k] = () => this.hover(k);
       v["t" + k] = this.shift(k);
     }
